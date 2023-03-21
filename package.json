@@ -4,7 +4,6 @@
   "description": "Bosses Bus och Lek",
   "main": "index.js",
   "source": "index.html",
-
   "scripts": {
     "start": "parcel"
   },
