@@ -1,0 +1,27 @@
+{
+  "name": "bossesbusochlek",
+  "version": "1.0.0",
+  "description": "Bosses Bus och Lek",
+  "main": "index.js",
+  "source": "index.html",
+
+  "scripts": {
+    "start": "parcel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alesa3/BossesBusOchLek.git"
+  },
+  "keywords": [
+    "bosse"
+  ],
+  "author": "qnaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alesa3/BossesBusOchLek/issues"
+  },
+  "homepage": "https://github.com/Alesa3/BossesBusOchLek#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  }
+}
