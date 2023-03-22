@@ -1,6 +1,7 @@
-export async function fetcher(url: string) {
-  const res = await fetch(url);
+export default async function fetcher(endURL: string) {
+  const originURL = "http://46.101.130.27/wp-json";
+  const res = await fetch(originURL + endURL);
   const data = await res.json();
-  console.log("inside func", data)
-  return data
+  console.log(data);
+  return data;
 }
