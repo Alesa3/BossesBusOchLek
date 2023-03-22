@@ -18,25 +18,23 @@ export default async function printHeader() {
 }
 
 function printPages(event: Event) {
-  if (event.target) {
-    const targetElement = event.target as HTMLLIElement;
-    switch (targetElement.innerText) {
-      case "Nyheter": {
-        //printa nyhetsidan
-        break;
-      }
-      case "Shop": {
-        //printa shop
-        break;
-      }
-      case "Start": {
-        //printa startsidan
-        break;
-      }
-      case "Butik": {
-        //printa kategorier
-        break;
-      }
+  const targetElement = event.target as HTMLLIElement;
+  switch (targetElement.innerText) {
+    case "Nyheter": {
+      //printa nyhetsidan
+      break;
+    }
+    case "Shop": {
+      //printa shop
+      break;
+    }
+    case "Start": {
+      //printa startsidan
+      break;
+    }
+    case "Butik": {
+      //printa kategorier
+      break;
     }
   }
 }
