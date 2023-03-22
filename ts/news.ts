@@ -5,25 +5,35 @@ export default function news() {
   const renderData = async () => {
     const data = await fetcher("/wp/v2/posts");
     wrapper.innerHTML = "";
-    const newsContainer = document.createElement("section");
-    newsContainer.id = "news-section";
+    const newsWrapper = document.createElement("section");
+    newsWrapper.id = "news-section";
 
     for (const post of data) {
-      const postElement = document.createElement("div");
-      postElement.setAttribute("id", "news-article");
-      postElement.classList.add("post");
+      const postEl = document.createElement("div");
+      postEl.setAttribute("class", "news-article");
+      postEl.classList.add("post");
 
-      const titleElement = document.createElement("h2");
-      titleElement.textContent = post.title.rendered;
-      postElement.appendChild(titleElement);
+      const titleEl = document.createElement("h2");
+      titleEl.textContent = post.title.rendered;
+      postEl.append(titleEl);
 
-      const contentElement = document.createElement("div");
-      contentElement.innerHTML = post.content.rendered;
-      postElement.appendChild(contentElement);
+      const postTimestamp = document.createElement("p");
+      postTimestamp.textContent = "Upplagd " + post.date_gmt;
+      postTimestamp.setAttribute("class", "post-timestamp");
+      postEl.append(postTimestamp);
 
-      newsContainer.appendChild(postElement);
+      const contentEl = document.createElement("p");
+      contentEl.innerHTML = post.excerpt.rendered;
+      postEl.append(contentEl);
+
+      const readMoreLink = document.createElement("a");
+      readMoreLink.href = post.link;
+      readMoreLink.innerText = "Läs mer";
+      postEl.append(readMoreLink);
+
+      newsWrapper.append(postEl);
     }
-    wrapper.appendChild(newsContainer);
+    wrapper.append(newsWrapper);
   };
   renderData();
 }
