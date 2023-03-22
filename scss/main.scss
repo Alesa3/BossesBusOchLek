@@ -55,4 +55,43 @@ body {
   #news-section {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+@use 'sass-utils' as *;
+
+body {
+  background-color: $backg-color;
+  
 }
+* {
+  margin: 0;
+  box-sizing: inherit;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: normal;
+}
+
+// main {
+//   padding: 0;
+//   margin: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100vh;
+// }
+
+// section {
+//   background-color: $box-color;
+//   border: $circle-border-width * 0.2px solid 
+//   $box-color;
+//   border-radius: 12%;
+//   width: $circle-diameter * 0.6px;
+//   height: $circle-diameter * 0.3px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 2em;
+//   margin-top: -80px;
+//   text-align: center;
+//   box-shadow: circle-drop-shadow(5, 
+//   $box-color);
+//   color: $backg-color;
+//   padding: 10px;
+// }
