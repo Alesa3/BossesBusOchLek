@@ -1,3 +1,90 @@
-body {
-  background-color: yellow;
+@use "sass-utils" as *;
+
+* {
+  margin: 0;
+  box-sizing: inherit;
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
 }
+
+body {
+  background-color: $backg-color;
+}
+#news-section {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  .post {
+    @include rounded-corners(1rem, 20px);
+    margin: 20px;
+    background-color: $box-color;
+    .post-timestamp {
+      font-size: 12px;
+      font-weight: 400;
+    }
+    h2 {
+      margin-bottom: 2px;
+    }
+    p {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    a {
+      color: black;
+      font-weight: regular;
+      text-decoration: none;
+      background: rgb(255, 255, 255),
+        linear-gradient(to right, #5eb39c, #5eb39c);
+      background-size: 100% 2px, 0 2px;
+      background-position: 100% 100%, 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 300ms;
+    }
+
+    a:hover {
+      background-size: 0 2px, 100% 2px;
+    }
+  }
+}
+
+@media (min-width: 1366px) {
+  #news-section {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1921px) {
+  #news-section {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/*
+main {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+section {
+  background-color: $box-color;
+  border: $circle-border-width * 0.2px solid 
+  $box-color;
+  border-radius: 12%;
+  width: $circle-diameter * 0.6px;
+  height: $circle-diameter * 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  margin-top: -80px;
+  text-align: center;
+  box-shadow: circle-drop-shadow(5, 
+  $box-color);
+  color: $backg-color;
+  padding: 10px;
+}
+*/
