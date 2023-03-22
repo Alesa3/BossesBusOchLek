@@ -2,6 +2,7 @@
 
 * {
   margin: 0;
+  padding: 0;
   box-sizing: inherit;
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
@@ -9,6 +10,25 @@
 
 body {
   background-color: $backg-color;
+  header {
+    width: fit-content;
+    margin: auto;
+    h1{
+      text-align: center;
+    }
+    ul{
+      margin-top: 3rem;
+      list-style-type: none;
+      li{
+        margin: 0 1rem;
+        display: inline;
+        @include moving-underline(black);
+        &:first-of-type{
+          margin-left: 0;
+        }
+      }
+    }
+  }
 }
 #news-section {
   padding: 20px;
