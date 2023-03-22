@@ -1,4 +1,5 @@
-import { fetcher } from "./fetcher";
-("use strict");
-const baseUrl = "http://46.101.130.27/wp-json/";
+import fetcher from "./fetcher";
+import printCategories from "./categories";
 
+("use strict");
+printCategories();
