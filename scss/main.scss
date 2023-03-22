@@ -59,6 +59,42 @@ body {
   }
 }
 
+i {
+  list-style-type: none;
+  display: flex; 
+  flex-wrap: wrap; 
+  display: row;
+  justify-content: center;  
+  display: inline-block; 
+  margin-left: -300px;
+  margin: 4px;
+  color: rgb(0, 0, 0);
+
+}
+
+
+.fa{
+  color:#000000;
+  font-size:20px;
+
+  margin: 4px;
+  margin-bottom: -800px;
+  }
+
+a {
+  color: rgb(0, 0, 0);
+    text-decoration: none;
+    list-style-type: none;
+
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+
 /*
 main {
   padding: 0;
