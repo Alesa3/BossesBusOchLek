@@ -15,9 +15,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   .post {
+    @include rounded-corners(1rem, 20px);
     margin: 20px;
-    background-color: #ffdad2;
-    padding: 20px;
+    background-color: $box-color;
     .post-timestamp {
       font-size: 12px;
       font-weight: 400;
@@ -31,7 +31,7 @@ body {
     }
     a {
       color: black;
-      font-weight: bold;
+      font-weight: regular;
       text-decoration: none;
       background: rgb(255, 255, 255),
         linear-gradient(to right, #5eb39c, #5eb39c);

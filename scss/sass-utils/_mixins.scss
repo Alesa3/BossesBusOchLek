@@ -1,5 +1,4 @@
-@mixin rounded-corners ($radius, $padding){
-    border-radius: $radius;
-    padding: $padding;
-
+@mixin rounded-corners($radius, $padding) {
+  border-radius: $radius;
+  padding: $padding;
 }
