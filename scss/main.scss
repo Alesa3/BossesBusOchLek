@@ -35,26 +35,39 @@ body {
       display: flex;
       justify-content: center;
       gap: 15%;
-      .is-vertically-aligned-center{
+      .is-vertically-aligned-center {
         align-self: center;
         background-color: $box-color;
 
-        .has-text-align-center{
+        .has-text-align-center {
           text-align: center;
-        }
-        &:nth-child(1){
-          padding: 5rem 5rem 5rem 50vw;
-        }
-        &:nth-child(2){
-          padding-right: 25vw;
         }
       }
       div {
         width: 500px;
-        figure, img {
+        figure,
+        img {
           width: 500px;
           height: 500px;
         }
+      }
+    }
+    .wp-block-columns:nth-child(odd) {
+      .wp-block-column:nth-child(1) {
+        padding: 5rem 5rem 5rem 20vw;
+        border-radius: 0 15rem 15rem 0;
+      }
+      .wp-block-column:nth-child(2) {
+        padding-right: 20vw;
+      }
+    }
+    .wp-block-columns:nth-child(even) {
+      .wp-block-column:nth-child(2) {
+        padding: 5rem 20vw 5rem 5rem;
+        border-radius: 15rem 0 0 15rem;
+      }
+      .wp-block-column:nth-child(1) {
+        padding-left: 20vw;
       }
     }
   }
