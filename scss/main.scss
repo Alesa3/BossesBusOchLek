@@ -2,6 +2,7 @@
 
 * {
   margin: 0;
+  padding: 0;
   box-sizing: inherit;
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
@@ -9,6 +10,25 @@
 
 body {
   background-color: $backg-color;
+  header {
+    width: fit-content;
+    margin: auto;
+    h1 {
+      text-align: center;
+    }
+    ul {
+      margin-top: 3rem;
+      list-style-type: none;
+      li {
+        margin: 0 1rem;
+        display: inline;
+        @include moving-underline(black);
+        &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+  }
 }
 
 main {
@@ -37,16 +57,7 @@ main {
         cursor: pointer;
         font-weight: regular;
         text-decoration: none;
-        background: rgb(255, 255, 255),
-          linear-gradient(to right, #5eb39c, #5eb39c);
-        background-size: 100% 2px, 0 2px;
-        background-position: 100% 100%, 0 100%;
-        background-repeat: no-repeat;
-        transition: background-size 300ms;
-      }
-
-      a:hover {
-        background-size: 0 2px, 100% 2px;
+        @include moving-underline(#5eb39c);
       }
     }
   }
@@ -75,6 +86,17 @@ main {
         cursor: pointer;
       }
     }
+  }
+}
+.categoryCard {
+  color: $text-color;
+  background-color: $category;
+  padding: 10vh;
+  text-align: center;
+  border: 1px solid black;
+  &:hover {
+    background-color: $btn-color;
+    font-weight: 600;
   }
 }
 
