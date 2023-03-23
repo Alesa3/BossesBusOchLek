@@ -10,39 +10,70 @@
 body {
   background-color: $backg-color;
 }
-#news-section {
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  .post {
-    @include rounded-corners(1rem, 20px);
-    margin: 20px;
-    background-color: $box-color;
-    .post-timestamp {
-      font-size: 12px;
-      font-weight: 400;
-    }
-    h2 {
-      margin-bottom: 2px;
-    }
-    p {
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-    a {
-      color: black;
-      font-weight: regular;
-      text-decoration: none;
-      background: rgb(255, 255, 255),
-        linear-gradient(to right, #5eb39c, #5eb39c);
-      background-size: 100% 2px, 0 2px;
-      background-position: 100% 100%, 0 100%;
-      background-repeat: no-repeat;
-      transition: background-size 300ms;
-    }
 
-    a:hover {
-      background-size: 0 2px, 100% 2px;
+main {
+  #news-section {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .post {
+      @include rounded-corners(1rem, 20px);
+      margin: 20px;
+      background-color: $box-color;
+      .post-timestamp {
+        font-size: 12px;
+        font-weight: 400;
+      }
+      h2 {
+        margin-bottom: 2px;
+        font-weight: bold;
+      }
+      p {
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      a {
+        color: black;
+        cursor: pointer;
+        font-weight: regular;
+        text-decoration: none;
+        background: rgb(255, 255, 255),
+          linear-gradient(to right, #5eb39c, #5eb39c);
+        background-size: 100% 2px, 0 2px;
+        background-position: 100% 100%, 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size 300ms;
+      }
+
+      a:hover {
+        background-size: 0 2px, 100% 2px;
+      }
+    }
+  }
+
+  #single-page-wrapper {
+    background-image: url("https://i.pinimg.com/564x/bc/6e/1c/bc6e1c3d16321f265e2a2c2b0de0c9a7.jpg");
+    background-repeat: repeat;
+    height: 100vh;
+    padding-top: 60px;
+    #single-page-content {
+      background-color: $box-color;
+      @include rounded-corners(1rem, 20px);
+      border: 1px solid #555;
+      width: 40%;
+      margin: auto;
+      padding: 20px;
+      h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      p {
+        margin-bottom: 12px;
+      }
+      button {
+        cursor: pointer;
+      }
     }
   }
 }

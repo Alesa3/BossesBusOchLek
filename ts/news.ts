@@ -42,7 +42,8 @@ export default function news() {
 
 function singleNewsFetch(event: Event) {
   const link = event.target as HTMLLinkElement;
+  console.log(link);
   fetcher("/wp/v2/posts/" + link.id).then((data) => {
-    console.log(data);
+    singlePage(data);
   });
 }
