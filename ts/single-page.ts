@@ -2,6 +2,7 @@ import news from "./news";
 const wrapper = document.querySelector("main") as HTMLElement;
 
 export default function singlePage(data: any) {
+  console.log(data);
   wrapper.innerHTML = "";
   const singlePageWrapper = document.createElement("section");
   singlePageWrapper.setAttribute("id", "single-page-wrapper");
@@ -21,8 +22,9 @@ export default function singlePage(data: any) {
   wrapper.append(singlePageWrapper);
 
   // Gör en if-sats och printa bara detta om man är på en nyhet
-  const tillbakaButton = document.createElement("button");
+  const tillbakaButton = document.createElement("a");
   tillbakaButton.innerText = "Tillbaka";
+  tillbakaButton.setAttribute("id", "tillbaka-btn");
   singlePageContent.append(tillbakaButton);
   tillbakaButton.addEventListener("click", news);
 }

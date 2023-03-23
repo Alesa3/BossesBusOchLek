@@ -1,4 +1,6 @@
 import fetcher from "./fetcher";
+import news from "./news";
+import printCategories from "./categories";
 
 const menu = document.querySelector("menu") as HTMLMenuElement;
 const storeName = document.querySelector("h1.storeName") as HTMLHeadingElement;
@@ -6,6 +8,7 @@ export default async function printHeader() {
   const storeInfo = await fetcher("");
   const menuItems = await fetcher("/wp/v2/menu-items/19");
   const ul = document.createElement("ul");
+  ul.setAttribute("id", "menu-ul");
   menuItems.map((item: { title: string }) => {
     console.log(item);
     const li = document.createElement("li");
@@ -21,7 +24,7 @@ function printPages(event: Event) {
   const targetElement = event.target as HTMLLIElement;
   switch (targetElement.innerText) {
     case "Nyheter": {
-      //printa nyhetsidan
+      news();
       break;
     }
     case "Shop": {
@@ -33,7 +36,7 @@ function printPages(event: Event) {
       break;
     }
     case "Butik": {
-      //printa kategorier
+      printCategories();
       break;
     }
   }

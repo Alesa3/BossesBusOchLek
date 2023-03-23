@@ -14,17 +14,23 @@ body {
     width: fit-content;
     margin: auto;
     h1 {
+      margin-top: 20px;
       text-align: center;
+      font-size: 2.5rem;
     }
-    ul {
-      margin-top: 3rem;
-      list-style-type: none;
-      li {
-        margin: 0 1rem;
-        display: inline;
-        @include moving-underline(black);
-        &:first-of-type {
-          margin-left: 0;
+    menu {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      ul {
+        list-style-type: none;
+        li {
+          margin: 0 1rem;
+          display: inline;
+          @include moving-underline(black);
+          &:first-of-type {
+            margin-left: 0;
+          }
         }
       }
     }
@@ -33,6 +39,8 @@ body {
 
 main {
   #news-section {
+    margin: auto;
+    max-width: 1920px;
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -65,13 +73,15 @@ main {
   #single-page-wrapper {
     background-image: url("https://i.pinimg.com/564x/bc/6e/1c/bc6e1c3d16321f265e2a2c2b0de0c9a7.jpg");
     background-repeat: repeat;
-    height: 100vh;
+    padding: 60px;
+    // height: 100vh;
     padding-top: 60px;
     #single-page-content {
       background-color: $box-color;
       @include rounded-corners(1rem, 20px);
       border: 1px solid #555;
       width: 40%;
+      max-width: 1920px;
       margin: auto;
       padding: 20px;
       h2 {
@@ -82,7 +92,9 @@ main {
       p {
         margin-bottom: 12px;
       }
-      button {
+      a {
+        @include moving-underline(#5eb39c);
+        font-weight: bold;
         cursor: pointer;
       }
     }
