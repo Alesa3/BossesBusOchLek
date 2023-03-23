@@ -2,3 +2,13 @@
   border-radius: $radius;
   padding: $padding;
 }
+@mixin moving-underline($color) {
+  background: rgb(255, 255, 255), linear-gradient(to right, $color, $color);
+  background-size: 100% 2px, 0 2px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 300ms;
+  &:hover {
+    background-size: 0 2px, 100% 2px;
+  }
+}
