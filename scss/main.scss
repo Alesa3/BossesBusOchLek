@@ -43,7 +43,20 @@ body {
 
     a:hover {
       background-size: 0 2px, 100% 2px;
+      
     }
+  }
+}
+.categoryCard{
+  color: $text-color;
+  background-color: $category;
+  padding: 10vh;
+  text-align: center;
+  border: 1px solid black;
+  &:hover{
+    background-color:$btn-color;
+    font-weight:600;
+    
   }
 }
 
