@@ -13,18 +13,47 @@ body {
   header {
     width: fit-content;
     margin: auto;
-    h1{
+    h1 {
       text-align: center;
     }
-    ul{
+    ul {
       margin-top: 3rem;
       list-style-type: none;
-      li{
+      li {
         margin: 0 1rem;
         display: inline;
         @include moving-underline(black);
-        &:first-of-type{
+        &:first-of-type {
           margin-left: 0;
+        }
+      }
+    }
+  }
+  main {
+    margin-top: 10rem;
+    .is-layout-flex {
+      display: flex;
+      justify-content: center;
+      gap: 15%;
+      .is-vertically-aligned-center{
+        align-self: center;
+        background-color: $box-color;
+
+        .has-text-align-center{
+          text-align: center;
+        }
+        &:nth-child(1){
+          padding: 5rem 5rem 5rem 50vw;
+        }
+        &:nth-child(2){
+          padding-right: 25vw;
+        }
+      }
+      div {
+        width: 500px;
+        figure, img {
+          width: 500px;
+          height: 500px;
         }
       }
     }
@@ -53,20 +82,19 @@ body {
       color: black;
       font-weight: regular;
       text-decoration: none;
-      @include moving-underline(#5eb39c)
+      @include moving-underline(#5eb39c);
     }
   }
 }
-.categoryCard{
+.categoryCard {
   color: $text-color;
   background-color: $category;
   padding: 10vh;
   text-align: center;
   border: 1px solid black;
-  &:hover{
-    background-color:$btn-color;
-    font-weight:600;
-    
+  &:hover {
+    background-color: $btn-color;
+    font-weight: 600;
   }
 }
 
