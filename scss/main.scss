@@ -84,8 +84,6 @@ body {
 
 i {
   list-style-type: none;
-  display: flex; 
-  flex-wrap: wrap; 
   display: row;
   justify-content: center;  
   display: inline-block; 
@@ -99,7 +97,6 @@ i {
 .fa{
   color:#000000;
   font-size:20px;
-
   margin: 4px;
   margin-bottom: -800px;
   }
@@ -108,22 +105,109 @@ a {
   color: rgb(0, 0, 0);
     text-decoration: none;
     list-style-type: none;
+  
 
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;  
-  margin-bottom: -200px;        /* Footer height */
 }
 
 .wrapper {
   background-color: $footer;
+  padding: 20px;
+  display: row;
+
+
+
+
+}
+
+#footerMenu {
+display: inline-block;
 }
 
 
+
+// }
+
+/* FOOTER*/
+
+.storeName {
+  font-weight: bold;
+  padding: 20px;
+}
+
+
+#socials {
+  margin: 20px;
+  font-size: 25px;
+  
+
+}
+
+.links {
+  margin-bottom: 2px;
+  margin-top: 20px;
+  padding: 100px 15%;
+  background: $footer;
+  color: black;
+  display: flex;
+}
+
+.footer {
+  margin-bottom: 2px;
+  margin-top: 20px;
+  padding: 100px 15%;
+  background: $footer;
+  color: black;
+  display: flex;
+}
+
+.footer div {
+  text-align: center;
+
+}
+
+.col-2 {
+  flex-grow: 2;
+}
+
+
+ .footer div h3{
+  font-weight: 300;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+ }
+
+form input {
+  width: 300px;
+  height: 45px;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  outline: none;
+  border: none;
+}
+
+form button {
+  background: transparent;
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.social-icons i {
+  font-size: 22px;
+  margin: 10px;
+  cursor: pointer;
+}
 
 
 /*
