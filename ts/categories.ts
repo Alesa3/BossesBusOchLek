@@ -10,6 +10,7 @@ export default function printCategories() {
             const categoryCard = document.createElement(
                 "div"
             ) as HTMLDivElement;
+            categoryCard.setAttribute("class", "categoryCard");
             categoryCard.innerText = categories[i].name;
             if (categories[i].name === "Uncategorized") {
                 continue;
