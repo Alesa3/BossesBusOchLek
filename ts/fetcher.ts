@@ -6,3 +6,4 @@ export default async function fetcher(path: string) {
   console.log(data);
   return data;
 }
+
