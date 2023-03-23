@@ -127,45 +127,36 @@ main {
 i {
   list-style-type: none;
   display: row;
-  justify-content: center;  
-  display: inline-block; 
+  justify-content: center;
+  display: inline-block;
   margin-left: -300px;
   margin: 4px;
   color: rgb(0, 0, 0);
-
 }
 
-
-.fa{
-  color:#000000;
-  font-size:20px;
+.fa {
+  color: #000000;
+  font-size: 20px;
   margin: 4px;
   margin-bottom: -800px;
-  }
+}
 
 a {
   color: rgb(0, 0, 0);
-    text-decoration: none;
-    list-style-type: none;
-  
-
+  text-decoration: none;
+  list-style-type: none;
 }
 
 .wrapper {
   background-color: $footer;
   padding: 20px;
   display: row;
-
-
-
-
 }
 
 #footerMenu {
-display: inline-block;
+  display: inline-block;
+  text-align: left !important;
 }
-
-
 
 // }
 
@@ -176,12 +167,9 @@ display: inline-block;
   padding: 20px;
 }
 
-
 #socials {
   margin: 20px;
   font-size: 25px;
-  
-
 }
 
 .links {
@@ -204,19 +192,17 @@ display: inline-block;
 
 .footer div {
   text-align: center;
-
 }
 
 .col-2 {
   flex-grow: 2;
 }
 
-
- .footer div h3{
+.footer div h3 {
   font-weight: 300;
   margin-bottom: 30px;
   letter-spacing: 1px;
- }
+}
 
 form input {
   width: 300px;
@@ -239,8 +225,6 @@ form button {
   cursor: pointer;
 }
 
-
-
 .social-icons {
   margin-top: 10px;
 }
@@ -250,7 +234,6 @@ form button {
   margin: 10px;
   cursor: pointer;
 }
-
 
 /*
 main {
