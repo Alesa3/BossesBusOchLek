@@ -7,8 +7,8 @@ export default function printFooterMenu() {
     const footer = data;
 
     for (let i = 0; i < data.length; i++) {
-      const footerCard = document.createElement("p") as HTMLElement;
-      footerCard.innerText = footer[i].title;
+      const footerCard = document.createElement("p") as HTMLDivElement;
+      footerCard.innerHTML = footer[i].title;
       footerCard.addEventListener("click", () => {
         console.log(footer[i].title);
       });

@@ -35,6 +35,48 @@ body {
       }
     }
   }
+  main {
+    margin-top: 10rem;
+    .is-layout-flex {
+      display: flex;
+      justify-content: center;
+      gap: 15%;
+      .is-vertically-aligned-center {
+        align-self: center;
+        background-color: $box-color;
+
+        .has-text-align-center {
+          text-align: center;
+        }
+      }
+      div {
+        width: 500px;
+        figure,
+        img {
+          width: 500px;
+          height: 500px;
+        }
+      }
+    }
+    .wp-block-columns:nth-child(odd) {
+      .wp-block-column:nth-child(1) {
+        padding: 5rem 5rem 5rem 20vw;
+        border-radius: 0 15rem 15rem 0;
+      }
+      .wp-block-column:nth-child(2) {
+        padding-right: 20vw;
+      }
+    }
+    .wp-block-columns:nth-child(even) {
+      .wp-block-column:nth-child(2) {
+        padding: 5rem 20vw 5rem 5rem;
+        border-radius: 15rem 0 0 15rem;
+      }
+      .wp-block-column:nth-child(1) {
+        padding-left: 20vw;
+      }
+    }
+  }
 }
 
 main {
@@ -111,6 +153,14 @@ main {
     font-weight: 600;
   }
 }
+.productCard {
+  text-align: center;
+  background-color: $box-color;
+  img {
+    max-width: 100%;
+    height: 250px;
+  }
+}
 
 @media (min-width: 1366px) {
   #news-section {
@@ -154,8 +204,7 @@ a {
 }
 
 #footerMenu {
-  display: inline-block;
-  text-align: left !important;
+  text-align: left;
 }
 
 // }
