@@ -13,19 +13,61 @@ body {
   header {
     width: fit-content;
     margin: auto;
-    h1{
+    h1 {
       text-align: center;
     }
-    ul{
+    ul {
       margin-top: 3rem;
       list-style-type: none;
-      li{
+      li {
         margin: 0 1rem;
         display: inline;
         @include moving-underline(black);
-        &:first-of-type{
+        &:first-of-type {
           margin-left: 0;
         }
+      }
+    }
+  }
+  main {
+    margin-top: 10rem;
+    .is-layout-flex {
+      display: flex;
+      justify-content: center;
+      gap: 15%;
+      .is-vertically-aligned-center {
+        align-self: center;
+        background-color: $box-color;
+
+        .has-text-align-center {
+          text-align: center;
+        }
+      }
+      div {
+        width: 500px;
+        figure,
+        img {
+          width: 500px;
+          height: 500px;
+        }
+      }
+    }
+    .wp-block-columns:nth-child(odd) {
+      .wp-block-column:nth-child(1) {
+        padding: 5rem 5rem 5rem 20vw;
+        border-radius: 0 15rem 15rem 0;
+      }
+      .wp-block-column:nth-child(2) {
+        padding-right: 20vw;
+      }
+    }
+    .wp-block-columns:nth-child(even) {
+      .wp-block-column:nth-child(2) {
+        padding: 5rem 20vw 5rem 5rem;
+        border-radius: 15rem 0 0 15rem;
+      }
+      .wp-block-column:nth-child(1) {
+        padding-left: 20vw;
       }
     }
   }
@@ -53,21 +95,28 @@ body {
       color: black;
       font-weight: regular;
       text-decoration: none;
-      @include moving-underline(#5eb39c)
+      @include moving-underline(#5eb39c);
     }
   }
 }
-.categoryCard{
+.categoryCard {
   color: $text-color;
   background-color: $category;
   padding: 10vh;
   text-align: center;
   border: 1px solid black;
-  &:hover{
-    background-color:$btn-color;
-    font-weight:600;
-    
+  &:hover {
+    background-color: $btn-color;
+    font-weight: 600;
   }
+}
+.productCard{
+text-align: center;
+background-color: $box-color;
+  img {  
+    max-width: 100%;  
+    height: 250px;  
+    }  
 }
 
 @media (min-width: 1366px) {

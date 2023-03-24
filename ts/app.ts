@@ -1,10 +1,8 @@
 "use strict";
-import news from "./news";
-// import printCategories from "./categories";
-import printHeader from "./header";
 import printFooterMenu from "./footer";
+import printHeader from "./header";
+import printLandingPage from "./landing-page";
 
 printHeader();
-document.addEventListener("DOMContentLoaded", () => news());
-// printCategories();
+printLandingPage();
 printFooterMenu();
