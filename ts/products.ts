@@ -10,6 +10,7 @@ interface product {
 }
 
 export default function printselected(selected: Array<product>) {
+    contentArea.innerHTML = "";
     for (let i = 0; i < selected.length; i++) {
         const productCard = document.createElement("div");
         productCard.innerHTML = "";
