@@ -1,8 +1,8 @@
 "use strict";
-import news from "./news";
-import printCategories from "./categories";
+import printFooterMenu from "./footer";
 import printHeader from "./header";
-import printProducts from "./products";
+import printLandingPage from "./landing-page";
 
 printHeader();
 printLandingPage();
+printFooterMenu();
