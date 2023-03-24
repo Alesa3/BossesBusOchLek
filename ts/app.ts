@@ -6,4 +6,3 @@ import printProducts from "./products";
 
 printHeader();
 printLandingPage();
-printCategories();
