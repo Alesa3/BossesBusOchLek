@@ -29,8 +29,8 @@ export default function printselected(selected: Array<product>) {
             console.log(selected[i].name);
         });
         
+        contentArea.append(productCard);
         productCard.append(productImage);
         productCard.append(productTitle, productPrice, addToCart);
-        contentArea.append(productCard);
     }
 }
