@@ -1,5 +1,5 @@
 import fetcher from "./fetcher";
-
+import printLandingPage from "./landing-page";
 const menu = document.querySelector("menu") as HTMLMenuElement;
 const storeName = document.querySelector("h1.storeName") as HTMLHeadingElement;
 export default async function printHeader() {
@@ -29,7 +29,7 @@ function printPages(event: Event) {
       break;
     }
     case "Start": {
-      //printa startsidan
+      printLandingPage();
       break;
     }
     case "Butik": {
