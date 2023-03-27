@@ -2,24 +2,20 @@ import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
-function filterProducts(ID: string) {
-  fetcher("/wc/v3/products").then((products: any) => {
-    console.log(products);
-    const result = products.find((product: any) => product.id == ID);
-    return result;
-  });
+async function filterProducts(ID: string): Promise<any> {
+  const result = fetcher("/wc/v3/products/" + ID);
+  // const result = products.find((product: any) => product.id == ID);
+  console.log(result);
+  return await result;
 }
 
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
-  console.log("Button", btn);
   console.log(btn.id);
-
-  const product = filterProducts(btn.id);
 
   // HÄMTA
   let cart = JSON.parse(localStorage.getItem("cart")!);
-  console.log("cart från LS", cart);
+  console.log("Cart från localStorage", cart);
 
   // ÄNDRA
   cart.push(btn.id);
@@ -28,26 +24,28 @@ export function addToCart(event: Event) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+printCart();
 export default function printCart() {
   carouselWrapper.classList.add("hidden");
   main.innerHTML = "";
-  console.log("hej printcart");
   const hundkorgWrapper = document.createElement("div");
-
-  // products.then((products: any) => {
-  //   const productsInCategory: any = products.filter((product: any) => {
-  //       return product.categories.find((category: any) => {
-  //         return target.id == category.name;
-  //       });
-  //     });
-  // })
+  hundkorgWrapper.setAttribute("class", "hundkorg-wrapper");
+  main.append(hundkorgWrapper);
 
   if (localStorage.getItem("cart")) {
     console.log("Kundvagn finns");
     if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
-      console.log(JSON.parse(localStorage.getItem("cart")!));
+      //   console.log(JSON.parse(localStorage.getItem("cart")!));'
+      let cart = JSON.parse(localStorage.getItem("cart")!);
+      console.log(cart);
+
+      cart.forEach((item: any) => {
+        console.log(item);
+        console.log(filterProducts(item));
+        // filterProducts(item).then((data: any) => console.log(data));
+      });
     } else {
-      console.log("Tom hundvagn");
+      hundkorgWrapper.innerText = "Din hundvagn är tom!";
     }
   } else {
     console.log("Kundvagn finns inte");

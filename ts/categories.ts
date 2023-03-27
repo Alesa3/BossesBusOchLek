@@ -26,7 +26,6 @@ export default function printCategories() {
         fetcher(productsUrl).then((data) => {
           const products = data; //typa denna sen
           const target = event.target as HTMLDivElement;
-          console.log("target", target.id);
           const productsInCategory: any = products.filter((product: any) => {
             return product.categories.find((category: any) => {
               return target.id == category.name;

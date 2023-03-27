@@ -33,9 +33,6 @@ export default function printselected(selected: Array<product>) {
 
     productPrice.innerText = selected[i].price + "kr";
 
-    productCard.addEventListener("click", () => {
-      console.log(selected[i].name);
-    });
     productsWrapper.append(productCard);
     productCard.append(productImage);
     productCard.append(productTitle, productPrice, addToCartBtn);

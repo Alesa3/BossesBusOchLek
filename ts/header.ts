@@ -44,12 +44,10 @@ function printPages(event: Event) {
     }
     case "Butik": {
       //printa kategorier
-      console.log("click butik");
       printCategories();
       break;
     }
     case "Hundkorg": {
-      console.log("click hundkorg");
       printCart();
       break;
     }
