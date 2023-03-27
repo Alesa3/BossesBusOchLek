@@ -5,6 +5,7 @@ const contentArea = document.querySelector("main") as HTMLElement;
 const productCategoryUrl = "/wc/v3/products/categories";
 
 export default function printCategories() {
+    contentArea.innerHTML = "";
     fetcher(productCategoryUrl).then((data) => {
         const categories = data;
 
@@ -36,7 +37,6 @@ export default function printCategories() {
                     printProducts(productsInCategory);
                 });
             });
-
             contentArea.appendChild(productcategoryCard);
         }
     });
