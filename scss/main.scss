@@ -176,7 +176,11 @@ body {
         font-weight: bold;
         margin-bottom: 1rem;
       }
-
+      img {
+        height: 100%;
+        width: 150px;
+        object-fit: cover;
+      }
       li {
         background-color: #fafafa;
         margin: 12px 0 0 0;
@@ -221,11 +225,6 @@ body {
               font-weight: bold;
             }
           }
-        }
-        img {
-          height: 100%;
-          width: 150px;
-          object-fit: cover;
         }
       }
     }
