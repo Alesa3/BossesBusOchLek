@@ -1,18 +1,16 @@
 import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
-const products = fetcher("/wc/v3/products");
+
 
 function filterProducts(ID: string) {
-  products.then((products: any) => {
-    const productsInCategory: any = products.filter((product: any) => {
-      return product.id.find((id: number) => {
-        return ID == product.id;
-      });
-    });
+  fetcher("/wc/v3/products").then((products: any) => {
+    console.log(products)
+    const result = products.find((product: any) => product.id == ID);
+    console.log(result)
   });
 }
-
+filterProducts("51");
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
 
@@ -60,7 +58,7 @@ export default function printCart() {
   if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
     console.log("Finns produkter");
 
-    hundkorg.innerText =
+    // hundkorg.innerText =
       JSON.parse(localStorage.getItem("cart")!).length + 1 + " st produkter";
 
     let emptyCartBtn = document.createElement("button");
