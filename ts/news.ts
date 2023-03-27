@@ -1,4 +1,5 @@
 import fetcher from "./fetcher";
+import singlePage from "./single-page";
 const wrapper = document.querySelector("main") as HTMLElement;
 
 export default function news() {
@@ -27,13 +28,22 @@ export default function news() {
       postEl.append(contentEl);
 
       const readMoreLink = document.createElement("a");
-      readMoreLink.href = post.link;
       readMoreLink.innerText = "Läs mer";
+      readMoreLink.setAttribute("id", post.id);
       postEl.append(readMoreLink);
+      readMoreLink.addEventListener("click", singleNewsFetch);
 
       newsWrapper.append(postEl);
     }
     wrapper.append(newsWrapper);
   };
   renderData();
+}
+
+function singleNewsFetch(event: Event) {
+  const link = event.target as HTMLLinkElement;
+  console.log(link);
+  fetcher("/wp/v2/posts/" + link.id).then((data) => {
+    singlePage(data);
+  });
 }

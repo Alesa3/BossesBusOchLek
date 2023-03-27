@@ -1,5 +1,3 @@
-import fetcher from "./fetcher";
-
 const contentArea = document.querySelector("main") as HTMLElement;
 
 interface product {
@@ -13,23 +11,26 @@ export default function printselected(selected: Array<product>) {
     contentArea.innerHTML = "";
     for (let i = 0; i < selected.length; i++) {
         const productCard = document.createElement("div");
+        const addToCart = document.createElement("button");
+        addToCart.innerText = "Lägg till i hundkorgen"
         productCard.innerHTML = "";
         productCard.setAttribute("class", "productCard");
         const productTitle = document.createElement("a");
         productTitle.innerText = selected[i].name;
-        productTitle.href = selected[i].permalink;
-        let productImage = document.createElement("img") as HTMLImageElement;
+        //lägg till event listener för print single prod i productTitle
+        const productImage = document.createElement("img");
         productImage.src = selected[i].images[0].src;
 
-        let productPrice = document.createElement("p");
-
+        const productPrice = document.createElement("p");
+        
         productPrice.innerText = selected[i].price + "kr";
 
         productCard.addEventListener("click", () => {
             console.log(selected[i].name);
         });
+        
         contentArea.append(productCard);
         productCard.append(productImage);
-        productCard.append(productTitle, productPrice);
+        productCard.append(productTitle, productPrice, addToCart);
     }
 }
