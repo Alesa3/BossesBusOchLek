@@ -14,17 +14,23 @@ body {
     width: fit-content;
     margin: auto;
     h1 {
+      margin-top: 20px;
       text-align: center;
+      font-size: 2.5rem;
     }
-    ul {
-      margin-top: 3rem;
-      list-style-type: none;
-      li {
-        margin: 0 1rem;
-        display: inline;
-        @include moving-underline(black);
-        &:first-of-type {
-          margin-left: 0;
+    menu {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      ul {
+        list-style-type: none;
+        li {
+          margin: 0 1rem;
+          display: inline;
+          @include moving-underline(black);
+          &:first-of-type {
+            margin-left: 0;
+          }
         }
       }
     }
@@ -72,30 +78,67 @@ body {
     }
   }
 }
-#news-section {
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  .post {
-    @include rounded-corners(1rem, 20px);
-    margin: 20px;
-    background-color: $box-color;
-    .post-timestamp {
-      font-size: 12px;
-      font-weight: 400;
+
+main {
+  #news-section {
+    margin: auto;
+    max-width: 1920px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .post {
+      @include rounded-corners(1rem, 20px);
+      margin: 20px;
+      background-color: $box-color;
+      .post-timestamp {
+        font-size: 12px;
+        font-weight: 400;
+      }
+      h2 {
+        margin-bottom: 2px;
+        font-weight: bold;
+      }
+      p {
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      a {
+        color: black;
+        cursor: pointer;
+        font-weight: regular;
+        text-decoration: none;
+        @include moving-underline(#5eb39c);
+      }
     }
-    h2 {
-      margin-bottom: 2px;
-    }
-    p {
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-    a {
-      color: black;
-      font-weight: regular;
-      text-decoration: none;
-      @include moving-underline(#5eb39c);
+  }
+
+  #single-page-wrapper {
+    background-image: url("https://i.pinimg.com/564x/bc/6e/1c/bc6e1c3d16321f265e2a2c2b0de0c9a7.jpg");
+    background-repeat: repeat;
+    padding: 60px;
+    // height: 100vh;
+    padding-top: 60px;
+    #single-page-content {
+      background-color: $box-color;
+      @include rounded-corners(1rem, 20px);
+      border: 1px solid #555;
+      width: 40%;
+      max-width: 1920px;
+      margin: auto;
+      padding: 20px;
+      h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      p {
+        margin-bottom: 12px;
+      }
+      a {
+        @include moving-underline(#5eb39c);
+        font-weight: bold;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -110,13 +153,13 @@ body {
     font-weight: 600;
   }
 }
-.productCard{
-text-align: center;
-background-color: $box-color;
-  img {  
-    max-width: 100%;  
-    height: 250px;  
-    }  
+.productCard {
+  text-align: center;
+  background-color: $box-color;
+  img {
+    max-width: 100%;
+    height: 250px;
+  }
 }
 .relatedProductsCard{
   display: flex;
@@ -141,45 +184,35 @@ background-color: $box-color;
 i {
   list-style-type: none;
   display: row;
-  justify-content: center;  
-  display: inline-block; 
+  justify-content: center;
+  display: inline-block;
   margin-left: -300px;
   margin: 4px;
   color: rgb(0, 0, 0);
-
 }
 
-
-.fa{
-  color:#000000;
-  font-size:20px;
+.fa {
+  color: #000000;
+  font-size: 20px;
   margin: 4px;
   margin-bottom: -800px;
-  }
+}
 
 a {
   color: rgb(0, 0, 0);
-    text-decoration: none;
-    list-style-type: none;
-  
-
+  text-decoration: none;
+  list-style-type: none;
 }
 
 .wrapper {
   background-color: $footer;
   padding: 20px;
   display: row;
-
-
-
-
 }
 
 #footerMenu {
-display: inline-block;
+  text-align: left;
 }
-
-
 
 // }
 
@@ -190,12 +223,9 @@ display: inline-block;
   padding: 20px;
 }
 
-
 #socials {
   margin: 20px;
   font-size: 25px;
-  
-
 }
 
 .links {
@@ -218,19 +248,17 @@ display: inline-block;
 
 .footer div {
   text-align: center;
-
 }
 
 .col-2 {
   flex-grow: 2;
 }
 
-
- .footer div h3{
+.footer div h3 {
   font-weight: 300;
   margin-bottom: 30px;
   letter-spacing: 1px;
- }
+}
 
 form input {
   width: 300px;
@@ -253,8 +281,6 @@ form button {
   cursor: pointer;
 }
 
-
-
 .social-icons {
   margin-top: 10px;
 }
@@ -264,6 +290,121 @@ form button {
   margin: 10px;
   cursor: pointer;
 }
+
+
+
+
+/* Carousel */
+
+
+.carousel {
+  position: relative;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+  margin-top: 26px;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-open:checked + .carousel-item {
+  position: static;
+  opacity: 100;
+}
+
+.carousel-item {
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+
+.carousel-item img {
+  display: block;
+  // height: auto;
+  // max-width: 100%;
+  width: 600;
+  height: 430px;
+}
+
+
+
+
+.carousel-control {
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  font-size: 40px;
+  height: 40px;
+  line-height: 35px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  cursor: pointer;
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  text-align: center;
+  width: 40px;
+  z-index: 10;
+}
+
+.carousel-control.prev {
+  left: 2%;
+}
+
+.carousel-control.next {
+  right: 2%;
+}
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #aaaaaa;
+}
+
+#carousel-1:checked ~ .control-1,
+#carousel-2:checked ~ .control-2,
+#carousel-3:checked ~ .control-3 {
+  display: block;
+}
+
+.carousel-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+
+.carousel-indicators li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.carousel-bullet {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 35px;
+}
+
+.carousel-bullet:hover {
+  color: #aaaaaa;
+}
+
+#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+  color: #428bca;
+}
+
 
 
 /*

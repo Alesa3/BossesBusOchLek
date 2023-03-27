@@ -16,23 +16,26 @@ export default function printselected(selected: Array<product>) {
     for (let i = 0; i < selected.length; i++) {
         const productCard = document.createElement("div");
         const productId = selected[i].id;
+        const addToCart = document.createElement("button");
+        addToCart.innerText = "Lägg till i hundkorgen";
         productCard.innerHTML = "";
         productCard.setAttribute("class", "productCard");
         const productTitle = document.createElement("p");
         productTitle.innerText = selected[i].name;
-
-        let productImage = document.createElement("img") as HTMLImageElement;
+        //lägg till event listener för print single prod i productTitle
+        const productImage = document.createElement("img");
         productImage.src = selected[i].images[0].src;
 
-        let productPrice = document.createElement("p");
+        const productPrice = document.createElement("p");
 
         productPrice.innerText = selected[i].price + "kr";
 
         productTitle.addEventListener("click", () => {
             printProductPage(productPageUrl + productId);
         });
+
         contentArea.append(productCard);
         productCard.append(productImage);
-        productCard.append(productTitle, productPrice);
+        productCard.append(productTitle, productPrice, addToCart);
     }
 }
