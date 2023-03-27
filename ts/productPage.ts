@@ -28,6 +28,9 @@ export default function printProductPage(url: string) {
                 const relatedProductTitle = document.createElement("h2");
                 relatedProductTitle.innerText = relatedProduct.name;
 
+                relatedProductTitle.addEventListener("click", () => {
+                    printProductPage(productUrl + relatedId);
+                });
                 relatedProductsCard.append(
                     relatedProductImage,
                     relatedProductTitle
