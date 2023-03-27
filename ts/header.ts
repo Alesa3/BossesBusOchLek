@@ -16,6 +16,12 @@ export default async function printHeader() {
     li.addEventListener("click", printPages);
     ul.appendChild(li);
   });
+  const hundkorg = document.createElement("li");
+  hundkorg.innerText = "Hundkorg";
+  hundkorg.classList.add("cart");
+  hundkorg.addEventListener("click", printPages);
+  ul.append(hundkorg);
+
   menu.appendChild(ul);
   storeName.innerHTML = storeInfo.name;
 }
@@ -40,6 +46,12 @@ function printPages(event: Event) {
       //printa kategorier
       console.log("click butik");
       printCategories();
+      break;
+    }
+    case "Hundkorg": {
+      //printa kategorier
+      console.log("click hundkorg");
+      // printCart();
       break;
     }
   }
