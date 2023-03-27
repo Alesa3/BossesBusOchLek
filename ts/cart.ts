@@ -1,25 +1,19 @@
-let menu = document.getElementById("menu");
-let cart = document.getElementById("cart");
+import fetcher from "./fetcher";
+const main = document.querySelector("main") as HTMLElement;
+const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
+const products = fetcher("/wc/v3/products");
 
-// KOLLA OM DET FINNS EN KUNDVAGN
-if (localStorage.getItem("cart")) {
-  console.log("Finns en kundvagn");
-  printCart();
-} else {
-  console.log("Skapar tom kundvagn");
-  let cart: any[] = [];
-  localStorage.setItem("cart", JSON.stringify(cart));
-  printCart();
+function filterProducts(ID: string) {
+  products.then((products: any) => {
+    const productsInCategory: any = products.filter((product: any) => {
+      return product.id.find((id: number) => {
+        return ID == product.id;
+      });
+    });
+  });
 }
 
-fetch("http://localhost:8888/rest/wp-json/wc/store/products")
-  .then((res) => res.json())
-  .then((data) => {
-    console.log("produkter", data);
-    printProductList(data);
-  });
-
-function addToCart(event: Event) {
+export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
 
   btn.addEventListener("click", () => {
@@ -34,14 +28,39 @@ function addToCart(event: Event) {
 
     // SPARA
     localStorage.setItem("cart", JSON.stringify(cart));
-    printCart();
   });
 }
 
-function printCart() {
+export default function printCart() {
+  carouselWrapper.classList.add("hidden");
+  main.innerHTML = "";
+  console.log("hej printcart");
+  const hundkorgWrapper = document.createElement("div");
+
+  // products.then((products: any) => {
+  //   const productsInCategory: any = products.filter((product: any) => {
+  //       return product.categories.find((category: any) => {
+  //         return target.id == category.name;
+  //       });
+  //     });
+  // })
+
+  if (localStorage.getItem("cart")) {
+    console.log("Kundvagn finns");
+    if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
+      console.log(JSON.parse(localStorage.getItem("cart")!));
+    } else {
+      console.log("Tom hundvagn");
+    }
+  } else {
+    console.log("Kundvagn finns inte");
+    localStorage.setItem("cart", JSON.stringify([]));
+  }
+
   if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
     console.log("Finns produkter");
-    cart.innerText =
+
+    hundkorg.innerText =
       JSON.parse(localStorage.getItem("cart")!).length + 1 + " st produkter";
 
     let emptyCartBtn = document.createElement("button");
@@ -52,15 +71,18 @@ function printCart() {
       printCart();
     });
 
-    let sendOrderBtn = document.createElement("button");
-    sendOrderBtn.innerText = "Skicka order";
+    //     let sendOrderBtn = document.createElement("button");
+    //     sendOrderBtn.innerText = "Skicka order";
 
-    sendOrderBtn.addEventListener("click", postOrder);
+    //     sendOrderBtn.addEventListener("click", postOrder);
 
-    cart.append(emptyCartBtn, sendOrderBtn);
-  } else {
-    console.log("Tom kundvagn");
-    cart.innerText = "Inga produkter";
+    //     cart.append(emptyCartBtn, sendOrderBtn);
+    //   } else {
+    //     console.log("Tom kundvagn");
+    //     cart.innerText = "Inga produkter";
+    //   }
+
+    main.append(hundkorgWrapper);
   }
 }
 
@@ -128,7 +150,3 @@ function postOrder() {
     })
     .catch((err) => console.log("err", err));
 }
-
-fetch("http://localhost:8888/rest/wp-json/menus/v1/menus/testmeny")
-  .then((res) => res.json())
-  .then((data) => console.log("menus", data));

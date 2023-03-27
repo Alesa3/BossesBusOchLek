@@ -1,3 +1,4 @@
+import printCart from "./cart";
 import printCategories from "./categories";
 import fetcher from "./fetcher";
 import printLandingPage from "./landing-page";
@@ -49,9 +50,8 @@ function printPages(event: Event) {
       break;
     }
     case "Hundkorg": {
-      //printa kategorier
       console.log("click hundkorg");
-      // printCart();
+      printCart();
       break;
     }
   }
