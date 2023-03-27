@@ -34,6 +34,6 @@ export default function printselected(selected: Array<product>) {
     });
     productsWrapper.append(productCard);
     productCard.append(productImage);
-    productCard.append(productTitle, productPrice);
+    productCard.append(productTitle, productPrice, addToCart);
   }
 }

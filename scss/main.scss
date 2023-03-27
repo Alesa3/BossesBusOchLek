@@ -150,13 +150,8 @@ body {
         padding: 20px;
         height: 325px;
         flex-direction: column;
-        border: 1px solid black;
         justify-content: space-between;
-        transition: 0.08s;
         border-radius: 0.5rem;
-        &:hover {
-          scale: 1.01;
-        }
         img {
           height: 250px;
           width: 100%;
@@ -164,6 +159,9 @@ body {
         }
         a {
           font-weight: 600;
+        }
+        button {
+          @include store-button;
         }
       }
     }
@@ -304,11 +302,7 @@ form button {
   cursor: pointer;
 }
 
-
-
-
 /* Carousel */
-
 
 .carousel {
   position: relative;
@@ -341,9 +335,6 @@ form button {
   width: 600;
   height: 430px;
 }
-
-
-
 
 .carousel-control {
   background: rgba(0, 0, 0, 0.28);
@@ -412,13 +403,27 @@ form button {
   color: #aaaaaa;
 }
 
-#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+#carousel-1:checked
+  ~ .control-1
+  ~ .carousel-indicators
+  li:nth-child(1)
+  .carousel-bullet,
+#carousel-2:checked
+  ~ .control-2
+  ~ .carousel-indicators
+  li:nth-child(2)
+  .carousel-bullet,
+#carousel-3:checked
+  ~ .control-3
+  ~ .carousel-indicators
+  li:nth-child(3)
+  .carousel-bullet {
   color: #428bca;
 }
 
-
+.hidden {
+  display: none;
+}
 
 /*
 main {

@@ -2,6 +2,7 @@ import printCategories from "./categories";
 import fetcher from "./fetcher";
 import printLandingPage from "./landing-page";
 import news from "./news";
+const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 const menu = document.querySelector("menu") as HTMLMenuElement;
 const storeName = document.querySelector("h1.storeName") as HTMLHeadingElement;
 export default async function printHeader() {
@@ -20,6 +21,7 @@ export default async function printHeader() {
 }
 
 function printPages(event: Event) {
+  carouselWrapper.classList.remove("hidden");
   const targetElement = event.target as HTMLLIElement;
   switch (targetElement.innerText) {
     case "Nyheter": {

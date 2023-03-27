@@ -3,8 +3,10 @@ import printProducts from "./products";
 const productsUrl = "/wc/v3/products";
 const contentArea = document.querySelector("main") as HTMLElement;
 const productCategoryUrl = "/wc/v3/products/categories";
+const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
 export default function printCategories() {
+  carouselWrapper.classList.add("hidden");
   contentArea.innerHTML = "";
   fetcher(productCategoryUrl).then((data) => {
     const categories = data;

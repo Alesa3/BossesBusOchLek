@@ -1,8 +1,10 @@
 import fetcher from "./fetcher";
 import singlePage from "./single-page";
 const wrapper = document.querySelector("main") as HTMLElement;
+const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
 export default function news() {
+  carouselWrapper.classList.add("hidden");
   const renderData = async () => {
     const data = await fetcher("/wp/v2/posts");
     wrapper.innerHTML = "";
