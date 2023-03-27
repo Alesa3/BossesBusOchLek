@@ -3,10 +3,10 @@ const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
 async function filterProducts(ID: string): Promise<any> {
-  const result = fetcher("/wc/v3/products/" + ID);
+  const result = await fetcher("/wc/v3/products/" + ID);
   // const result = products.find((product: any) => product.id == ID);
   console.log(result);
-  return await result;
+  return result;
 }
 
 export function addToCart(event: Event) {
@@ -24,7 +24,7 @@ export function addToCart(event: Event) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-printCart();
+// printCart();
 export default function printCart() {
   carouselWrapper.classList.add("hidden");
   main.innerHTML = "";
@@ -39,10 +39,10 @@ export default function printCart() {
       let cart = JSON.parse(localStorage.getItem("cart")!);
       console.log(cart);
 
-      cart.forEach((item: any) => {
-        console.log(item);
-        console.log(filterProducts(item));
-        // filterProducts(item).then((data: any) => console.log(data));
+      cart.forEach((id: any) => {
+        fetcher("/wc/v3/products/" + id).then((result: any) =>
+          console.log(result)
+        );
       });
     } else {
       hundkorgWrapper.innerText = "Din hundvagn är tom!";
@@ -98,7 +98,7 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456",
+      phone: "070123456"
     },
     shipping: {
       first_name: "Janne",
@@ -108,34 +108,34 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456",
+      phone: "070123456"
     },
     line_items: [
       // LOOPA IGENOM KUNDVAGN
       {
         product_id: 13,
-        quantity: 1,
+        quantity: 1
       },
       {
         product_id: 11,
-        quantity: 2,
-      },
+        quantity: 2
+      }
     ],
     shipping_lines: [
       {
         method_id: "flat_rate",
         method_title: "Flat rate",
-        total: "100",
-      },
-    ],
+        total: "100"
+      }
+    ]
   };
 
   fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
+      "Content-type": "application/json"
     },
-    body: JSON.stringify(order),
+    body: JSON.stringify(order)
   })
     .then((res) => res.json())
     .then((data) => {
