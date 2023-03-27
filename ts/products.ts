@@ -6,6 +6,7 @@ interface product {
   permalink: string;
   images: Array<{ src: string }>;
   price: number;
+  id: string;
 }
 
 export default function printselected(selected: Array<product>) {
@@ -18,6 +19,7 @@ export default function printselected(selected: Array<product>) {
     const productCard = document.createElement("div");
     const addToCartBtn = document.createElement("button");
     addToCartBtn.innerText = "Lägg till i hundkorgen";
+    addToCartBtn.id = selected[i].id;
     addToCartBtn.addEventListener("click", addToCart);
     productCard.innerHTML = "";
     productCard.setAttribute("class", "productCard");

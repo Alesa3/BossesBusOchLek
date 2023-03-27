@@ -12,6 +12,8 @@ function filterProducts(ID: string) {
 
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
+  console.log("Button", btn);
+  console.log(btn.id);
 
   const product = filterProducts(btn.id);
 
@@ -20,7 +22,7 @@ export function addToCart(event: Event) {
   console.log("cart från LS", cart);
 
   // ÄNDRA
-  cart.push(product);
+  cart.push(btn.id);
 
   // SPARA
   localStorage.setItem("cart", JSON.stringify(cart));
