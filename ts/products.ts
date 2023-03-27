@@ -15,6 +15,8 @@ export default function printselected(selected: Array<product>) {
 
   for (let i = 0; i < selected.length; i++) {
     const productCard = document.createElement("div");
+    const addToCart = document.createElement("button");
+    addToCart.innerText = "Lägg till i hundkorgen";
     productCard.innerHTML = "";
     productCard.setAttribute("class", "productCard");
     const productTitle = document.createElement("a");
