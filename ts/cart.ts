@@ -2,31 +2,28 @@ import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
-
 function filterProducts(ID: string) {
   fetcher("/wc/v3/products").then((products: any) => {
-    console.log(products)
+    console.log(products);
     const result = products.find((product: any) => product.id == ID);
-    console.log(result)
+    return result;
   });
 }
-filterProducts("51");
+
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
 
-  btn.addEventListener("click", () => {
-    console.log("Click på produkt", btn.id);
+  const product = filterProducts(btn.id);
 
-    // HÄMTA
-    let cart = JSON.parse(localStorage.getItem("cart")!);
-    console.log("cart från LS", cart);
+  // HÄMTA
+  let cart = JSON.parse(localStorage.getItem("cart")!);
+  console.log("cart från LS", cart);
 
-    // ÄNDRA
-    cart.push(btn.id);
+  // ÄNDRA
+  cart.push(product);
 
-    // SPARA
-    localStorage.setItem("cart", JSON.stringify(cart));
-  });
+  // SPARA
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 export default function printCart() {
@@ -59,7 +56,7 @@ export default function printCart() {
     console.log("Finns produkter");
 
     // hundkorg.innerText =
-      JSON.parse(localStorage.getItem("cart")!).length + 1 + " st produkter";
+    JSON.parse(localStorage.getItem("cart")!).length + 1 + " st produkter";
 
     let emptyCartBtn = document.createElement("button");
     emptyCartBtn.innerText = "Töm kundvagnen";

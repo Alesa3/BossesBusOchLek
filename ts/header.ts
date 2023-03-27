@@ -11,7 +11,6 @@ export default async function printHeader() {
   const menuItems = await fetcher("/wp/v2/menu-items/19");
   const ul = document.createElement("ul");
   menuItems.map((item: { title: string }) => {
-    console.log(item);
     const li = document.createElement("li");
     li.innerText = item.title;
     li.addEventListener("click", printPages);

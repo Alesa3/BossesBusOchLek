@@ -1,4 +1,5 @@
 const contentArea = document.querySelector("main") as HTMLElement;
+import { addToCart } from "./cart";
 
 interface product {
   name: string;
@@ -15,8 +16,9 @@ export default function printselected(selected: Array<product>) {
 
   for (let i = 0; i < selected.length; i++) {
     const productCard = document.createElement("div");
-    const addToCart = document.createElement("button");
-    addToCart.innerText = "Lägg till i hundkorgen";
+    const addToCartBtn = document.createElement("button");
+    addToCartBtn.innerText = "Lägg till i hundkorgen";
+    addToCartBtn.addEventListener("click", addToCart);
     productCard.innerHTML = "";
     productCard.setAttribute("class", "productCard");
     const productTitle = document.createElement("a");
@@ -34,6 +36,6 @@ export default function printselected(selected: Array<product>) {
     });
     productsWrapper.append(productCard);
     productCard.append(productImage);
-    productCard.append(productTitle, productPrice, addToCart);
+    productCard.append(productTitle, productPrice, addToCartBtn);
   }
 }
