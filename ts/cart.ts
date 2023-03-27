@@ -2,12 +2,12 @@ import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
-async function filterProducts(ID: string): Promise<any> {
-  const result = await fetcher("/wc/v3/products/" + ID);
-  // const result = products.find((product: any) => product.id == ID);
-  console.log(result);
-  return result;
-}
+// async function filterProducts(ID: string): Promise<any> {
+//   const result = await fetcher("/wc/v3/products/" + ID);
+//   // const result = products.find((product: any) => product.id == ID);
+//   console.log(result);
+//   return result;
+// }
 
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
@@ -24,6 +24,11 @@ export function addToCart(event: Event) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+// Räkna hur många items finns i cart
+function numberOfItemInCart(array, value) {
+  return array.filter((v) => v === value).length;
+}
+
 // printCart();
 export default function printCart() {
   carouselWrapper.classList.add("hidden");
@@ -31,6 +36,13 @@ export default function printCart() {
   const hundkorgWrapper = document.createElement("div");
   hundkorgWrapper.setAttribute("class", "hundkorg-wrapper");
   main.append(hundkorgWrapper);
+  const cartTitle = document.createElement("h2");
+  cartTitle.innerText = "Din hundkorg";
+  cartTitle.setAttribute("id", "cart-title");
+
+  const cartUL = document.createElement("ul");
+  cartUL.setAttribute("id", "cart-UL");
+  hundkorgWrapper.append(cartTitle, cartUL);
 
   if (localStorage.getItem("cart")) {
     console.log("Kundvagn finns");
@@ -39,10 +51,54 @@ export default function printCart() {
       let cart = JSON.parse(localStorage.getItem("cart")!);
       console.log(cart);
 
-      cart.forEach((id: any) => {
-        fetcher("/wc/v3/products/" + id).then((result: any) =>
-          console.log(result)
-        );
+      cart.map((id: any) => {
+        fetcher("/wc/v3/products/" + id).then((product: any) => {
+          const productLI = document.createElement("li");
+          productLI.setAttribute("class", "cart-LI");
+
+          const productInfo = document.createElement("div");
+          productInfo.setAttribute("class", "product-info");
+
+          const productImg = document.createElement("img");
+
+          const upperProductBox = document.createElement("div");
+          upperProductBox.setAttribute("class", "upper-product-info");
+
+          const productDetails = document.createElement("div");
+          productDetails.setAttribute("class", "product-details");
+          const productName = document.createElement("h3");
+          const productDescription = document.createElement("p");
+          productDetails.append(productName, productDescription);
+
+          const productDeleteDiv = document.createElement("div");
+          const productDelete = document.createElement("button");
+          productDeleteDiv.append(productDelete);
+
+          upperProductBox.append(productDetails, productDeleteDiv);
+
+          const lowerProductBox = document.createElement("div");
+          lowerProductBox.setAttribute("class", "lower-product-info");
+          const productPrice = document.createElement("span");
+          const productQuantity = document.createElement("span");
+          lowerProductBox.append(productPrice, productQuantity);
+
+          productImg.src = product.images[0].src;
+          productName.innerText = product.name;
+          productDescription.innerHTML = product.description;
+          productPrice.innerText = product.price + " kr";
+          productPrice.setAttribute("class", "product-price");
+          productQuantity.innerText = `ANTAL: ${numberOfItemInCart(
+            cart,
+            product.id
+          )}`;
+          productDelete.innerText = "Radera";
+
+          productInfo.append(upperProductBox, lowerProductBox);
+          productLI.append(productImg, productInfo);
+          cartUL.append(productLI);
+
+          console.log(product);
+        });
       });
     } else {
       hundkorgWrapper.innerText = "Din hundvagn är tom!";
@@ -98,7 +154,7 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     shipping: {
       first_name: "Janne",
@@ -108,34 +164,34 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     line_items: [
       // LOOPA IGENOM KUNDVAGN
       {
         product_id: 13,
-        quantity: 1
+        quantity: 1,
       },
       {
         product_id: 11,
-        quantity: 2
-      }
+        quantity: 2,
+      },
     ],
     shipping_lines: [
       {
         method_id: "flat_rate",
         method_title: "Flat rate",
-        total: "100"
-      }
-    ]
+        total: "100",
+      },
+    ],
   };
 
   fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json"
+      "Content-type": "application/json",
     },
-    body: JSON.stringify(order)
+    body: JSON.stringify(order),
   })
     .then((res) => res.json())
     .then((data) => {
