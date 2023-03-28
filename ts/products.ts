@@ -1,15 +1,10 @@
 const contentArea = document.querySelector("main") as HTMLElement;
 import { addToCart } from "./cart";
+import { iProduct } from "./interfaces";
 
-interface product {
-  name: string;
-  permalink: string;
-  images: Array<{ src: string }>;
-  price: number;
-  id: string;
-}
 
-export default function printselected(selected: Array<product>) {
+
+export default function printselected(selected: Array<iProduct>) {
   contentArea.innerHTML = "";
   const productsWrapper = document.createElement("section");
   productsWrapper.setAttribute("id", "products-wrapper");

@@ -1,16 +1,12 @@
+import { numberOfItemInCart } from "./cart";
 import fetcher from "./fetcher";
+import { iProduct } from "./interfaces";
 
 const main = document.querySelector("main") as HTMLElement;
 const productsWrapper = document.createElement("section");
 productsWrapper.classList.add("productsWrap");
 
-interface iProduct {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  images: [src: string];
-}
+
 
 export default function printCheckout() {
   main.innerHTML = "";
@@ -23,53 +19,26 @@ export default function printCheckout() {
   // let cost = 0;
   cart.map((id: string) => {
     // [13, 15, 14, 15]
-    fetcher(`/wc/v3/products/${id}`).then((p: iProduct) => {
-      const product = checkQuantity(p);
-      const hasBeenPrinted: iProduct[] = [];
-      // cost += product.price;
-      if (product.quantity > 1) {
-        if (!hasBeenPrinted.find((p: iProduct) => (p.id = product.id))) {
-          //print
-          createProduct(product);
-          hasBeenPrinted.push(product);
-          //lägg till i has been printed
-        }
-      } else {
-        //printa
-        createProduct(product);
-      }
+    fetcher(`/wc/v3/products/${id}`).then((product: iProduct) => {
+      console.log(cart)
+      console.log(product.id)
+      console.log(numberOfItemInCart(cart, product.id))
     });
   });
   main.append(productsWrapper);
 }
-const previousProducts: iProduct[] = [];
-
-function checkQuantity(prod: iProduct) {
-  prod.quantity = 1;
-  const found = previousProducts.find(
-    (prevProd: iProduct) => prevProd.id === prod.id
-  );
-  previousProducts.push(prod);
-
-  if (found) {
-    found.quantity += 1;
-    return found;
-  } else return prod;
-}
 
 function createProduct(product: iProduct) {
   const productName = (document.createElement("p").innerText = product.name);
-  const productPrice = (document.createElement("p").innerText =
-    product.price.toString());
-  const productQuantity = (document.createElement("p").innerText =
-    product.quantity.toString());
+  const productPrice = (document.createElement("p").innerText = ` Pris: ${product.price.toString()}`);
+  const productQuantity = (document.createElement("p").innerText = ` Antal: ${product.quantity.toString()}`);
   const productImage = document.createElement("img");
-  productImage.setAttribute("src", product.images[0]);
+  productImage.src = product.images[0].src;
 
   const sectionProduct = document.createElement("div");
 
   sectionProduct.append(
-    productImage,
+    // productImage,
     productName,
     productPrice,
     productQuantity

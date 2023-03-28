@@ -1,3 +1,4 @@
+import { iProduct } from "./interfaces";
 import printCheckout from "./checkout";
 import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
@@ -13,24 +14,57 @@ const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
   console.log(btn.id);
+  //[1, 2, 3]
 
+  /*
+[
+  {
+    id: 1
+    qty: 1
+  },
+  {
+    id: 12
+    qty: 1
+  },
+  {
+    id: 13
+    qty: 2
+  },
+]
+*/
   // HÄMTA
   let cart = JSON.parse(localStorage.getItem("cart")!);
   console.log("Cart från localStorage", cart);
 
   // ÄNDRA
-  cart.push(btn.id);
+  if (cart.length > 0) {
+    cart.map((c: iProduct) => {
+      if (c.id == btn.id) {
+        c.quantity++;
+      } else {
+        cart.push({
+          id: btn.id,
+          quantity: 1
+        });
+      }
+    });
+  }else{
+    cart.push({
+      id: btn.id,
+      quantity: 1
+    });
+  }
+
 
   // SPARA
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 // Räkna hur många items finns i cart
-function numberOfItemInCart(array, value) {
-  return array.filter((v) => v === value).length;
+export function numberOfItemInCart(cart: string[], id: string) {
+  return cart.filter((v) => v == id).length;
 }
 
-// printCart();
 export default function printCart() {
   carouselWrapper.classList.add("hidden");
   main.innerHTML = "";
@@ -100,6 +134,8 @@ export default function printCart() {
           cartUL.append(productLI);
 
           totalAmount += Number(product.price);
+          console.log(totalAmount);
+          cartTotalPrice.innerText = totalAmount.toString() + " kr";
         });
       });
       const checkoutRow = document.createElement("div");
@@ -178,7 +214,7 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456",
+      phone: "070123456"
     },
     shipping: {
       first_name: "Janne",
@@ -188,34 +224,34 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456",
+      phone: "070123456"
     },
     line_items: [
       // LOOPA IGENOM KUNDVAGN
       {
         product_id: 13,
-        quantity: 1,
+        quantity: 1
       },
       {
         product_id: 11,
-        quantity: 2,
-      },
+        quantity: 2
+      }
     ],
     shipping_lines: [
       {
         method_id: "flat_rate",
         method_title: "Flat rate",
-        total: "100",
-      },
-    ],
+        total: "100"
+      }
+    ]
   };
 
   fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
+      "Content-type": "application/json"
     },
-    body: JSON.stringify(order),
+    body: JSON.stringify(order)
   })
     .then((res) => res.json())
     .then((data) => {
