@@ -89,7 +89,7 @@ export default function printCart() {
           productPrice.setAttribute("class", "product-price");
           productQuantity.innerText = `ANTAL: ${numberOfItemInCart(
             cart,
-            product.id
+            product.id.toString()
           )}`;
           productDelete.innerText = "Radera";
 
