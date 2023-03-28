@@ -15,15 +15,18 @@ export default function printselected(selected: Array<product>) {
     contentArea.innerHTML = "";
     for (let i = 0; i < selected.length; i++) {
         const productCard = document.createElement("div");
+        productCard.setAttribute("class", "productCard");
         const productId = selected[i].id;
         const addToCart = document.createElement("button");
         addToCart.innerText = "Lägg till i hundkorgen";
         productCard.innerHTML = "";
         productCard.setAttribute("class", "productCard");
         const productTitle = document.createElement("p");
+        productTitle.setAttribute("class", "productTitle");
         productTitle.innerText = selected[i].name;
         //lägg till event listener för print single prod i productTitle
         const productImage = document.createElement("img");
+        productImage.setAttribute("class", "productImage");
         productImage.src = selected[i].images[0].src;
 
         const productPrice = document.createElement("p");
