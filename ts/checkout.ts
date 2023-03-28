@@ -1,8 +1,8 @@
 import fetcher from "./fetcher";
 
 const main = document.querySelector("main") as HTMLElement;
-const contentWrapper = document.createElement("div");
-contentWrapper.classList.add("checkoutWrapp");
+const productsWrapper = document.createElement("section");
+productsWrapper.classList.add("productsWrap");
 
 interface iProduct {
   id: number;
@@ -19,20 +19,23 @@ export default function printCheckout() {
   }
 
   const cart = JSON.parse(localStorage.getItem("cart")!);
-  let cost = 0;
+  // let cost = 0;
   cart.map((id: string) => {
     // [13, 15, 14, 15]
     fetcher(`/wc/v3/products/ ${id}`).then((p: iProduct) => {
       const product = checkQuantity(p);
       const hasBeenPrinted: iProduct[] = [];
-      cost += product.price;
+      // cost += product.price;
       if (product.quantity > 1) {
         if (!hasBeenPrinted.find((p: iProduct) => (p.id = product.id))) {
           //print
+          createProduct(product);
+          
           //lägg till i has been printed
         }
       } else {
         //printa
+        createProduct(product);
       }
     });
   });
@@ -50,4 +53,21 @@ function checkQuantity(prod: iProduct) {
     found.quantity += 1;
     return found;
   } else return prod;
+}
+
+
+function createProduct(product: iProduct) {
+
+const productName = document.createElement("p").innerText = product.name;
+const productPrice = document.createElement("p").innerText = product.price.toString();
+const productQuantity = document.createElement("p").innerText = product.quantity.toString();
+const productImage = document.createElement("img");
+productImage.setAttribute("src", product.images[0]);
+
+const sectionProduct = document.createElement("div");
+
+sectionProduct.append(productImage, productName, productPrice, productQuantity)
+productsWrapper.append(sectionProduct);
+
+
 }
