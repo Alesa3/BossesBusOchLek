@@ -30,7 +30,7 @@ export default function printCheckout() {
         if (!hasBeenPrinted.find((p: iProduct) => (p.id = product.id))) {
           //print
           createProduct(product);
-          
+
           //lägg till i has been printed
         }
       } else {
@@ -55,19 +55,22 @@ function checkQuantity(prod: iProduct) {
   } else return prod;
 }
 
-
 function createProduct(product: iProduct) {
+  const productName = (document.createElement("p").innerText = product.name);
+  const productPrice = (document.createElement("p").innerText =
+    product.price.toString());
+  const productQuantity = (document.createElement("p").innerText =
+    product.quantity.toString());
+  const productImage = document.createElement("img");
+  productImage.setAttribute("src", product.images[0]);
 
-const productName = document.createElement("p").innerText = product.name;
-const productPrice = document.createElement("p").innerText = product.price.toString();
-const productQuantity = document.createElement("p").innerText = product.quantity.toString();
-const productImage = document.createElement("img");
-productImage.setAttribute("src", product.images[0]);
+  const sectionProduct = document.createElement("div");
 
-const sectionProduct = document.createElement("div");
-
-sectionProduct.append(productImage, productName, productPrice, productQuantity)
-productsWrapper.append(sectionProduct);
-
-
+  sectionProduct.append(
+    productImage,
+    productName,
+    productPrice,
+    productQuantity
+  );
+  productsWrapper.append(sectionProduct);
 }
