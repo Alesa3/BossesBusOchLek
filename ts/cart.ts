@@ -50,6 +50,7 @@ export default function printCart() {
       //   console.log(JSON.parse(localStorage.getItem("cart")!));'
       let cart = JSON.parse(localStorage.getItem("cart")!);
       console.log(cart);
+      let totalAmount: number = 0;
 
       cart.map((id: any) => {
         fetcher("/wc/v3/products/" + id).then((product: any) => {
@@ -97,9 +98,28 @@ export default function printCart() {
           productLI.append(productImg, productInfo);
           cartUL.append(productLI);
 
-          console.log(product);
+          totalAmount += Number(product.price);
         });
       });
+      const checkoutRow = document.createElement("div");
+      checkoutRow.setAttribute("id", "checkout-container");
+      hundkorgWrapper.append(checkoutRow);
+
+      const priceInfo = document.createElement("div");
+      priceInfo.setAttribute("id", "price-info");
+      const cartTotalTitle = document.createElement("h3");
+      cartTotalTitle.innerText = "Summa";
+      const cartTotalPrice = document.createElement("p");
+      cartTotalPrice.innerText = totalAmount.toString() + " kr";
+      priceInfo.append(cartTotalTitle, cartTotalPrice);
+
+      const checkoutContainer = document.createElement("div");
+      checkoutContainer.setAttribute("id", "checkout-button-container");
+      const checkoutBtn = document.createElement("button");
+      checkoutBtn.innerText = "Gå till kassa";
+      checkoutContainer.append(checkoutBtn);
+
+      checkoutRow.append(priceInfo, checkoutContainer);
     } else {
       hundkorgWrapper.innerText = "Din hundvagn är tom!";
     }

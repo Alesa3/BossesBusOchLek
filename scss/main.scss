@@ -227,6 +227,27 @@ body {
           }
         }
       }
+      #checkout-container {
+        padding: 1rem 4px 0 4px;
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-between;
+        #price-info {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          h3 {
+            font-weight: bold;
+          }
+        }
+        #checkout-button-container {
+          display: flex;
+          align-items: center;
+          button {
+            padding: 4px 6px;
+          }
+        }
+      }
     }
   }
 }
