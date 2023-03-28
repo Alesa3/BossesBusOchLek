@@ -155,11 +155,14 @@ main {
 }
 .productTitle{
   &:hover{
+    
     font-weight: bolder;
+    cursor: pointer;
   }
         
 }
 .productCard{
+  
   text-align: center;
 }
 .productDetails {
@@ -173,12 +176,18 @@ main {
   height: 250px;
 }
 .relatedProductsCard{
-  
   text-align: center;
- 
-    .relatedProductsTitle{
-      text-align: center;
+  h2{
+    text-align: center;
+  }
+  .relatedProductsTitle{
+    text-align: center;
+    &:hover{
+      font-weight: bolder;
+      cursor: pointer;
     } 
+  text-align: center;
+    }
 }
 
 @media (min-width: 1366px) {

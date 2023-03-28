@@ -23,7 +23,7 @@ export default function printProductPage(url: string) {
         const purchaseBtn = document.createElement("input");
         const relatedProductsTitle = document.createElement("h2");
         relatedProductsTitle.innerText = "Relaterade Produkter";
-        relatedProductsTitle.setAttribute("class", "relatedProductsTitle");
+
         relatedProductsCard.appendChild(relatedProductsTitle);
         productPage.related_ids.forEach((relatedId: any) => {
             fetcher(productUrl + relatedId).then((relatedProduct) => {
@@ -31,6 +31,10 @@ export default function printProductPage(url: string) {
                 relatedProductImage.setAttribute("class", "productImage");
                 relatedProductImage.src = relatedProduct.images[0].src;
                 const relatedProductTitle = document.createElement("h2");
+                relatedProductTitle.setAttribute(
+                    "class",
+                    "relatedProductsTitle"
+                );
                 relatedProductTitle.innerText = relatedProduct.name;
 
                 relatedProductTitle.addEventListener("click", () => {
