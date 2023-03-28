@@ -1,3 +1,4 @@
+import printCheckout from "./checkout";
 import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
@@ -117,6 +118,9 @@ export default function printCart() {
       checkoutContainer.setAttribute("id", "checkout-button-container");
       const checkoutBtn = document.createElement("button");
       checkoutBtn.innerText = "Gå till kassa";
+
+      checkoutBtn.addEventListener("click", printCheckout);
+
       checkoutContainer.append(checkoutBtn);
 
       checkoutRow.append(priceInfo, checkoutContainer);

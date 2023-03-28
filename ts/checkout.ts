@@ -19,10 +19,11 @@ export default function printCheckout() {
   }
 
   const cart = JSON.parse(localStorage.getItem("cart")!);
+  console.log(cart);
   // let cost = 0;
   cart.map((id: string) => {
     // [13, 15, 14, 15]
-    fetcher(`/wc/v3/products/ ${id}`).then((p: iProduct) => {
+    fetcher(`/wc/v3/products/${id}`).then((p: iProduct) => {
       const product = checkQuantity(p);
       const hasBeenPrinted: iProduct[] = [];
       // cost += product.price;
@@ -30,7 +31,7 @@ export default function printCheckout() {
         if (!hasBeenPrinted.find((p: iProduct) => (p.id = product.id))) {
           //print
           createProduct(product);
-
+          hasBeenPrinted.push(product);
           //lägg till i has been printed
         }
       } else {
@@ -39,6 +40,7 @@ export default function printCheckout() {
       }
     });
   });
+  main.append(productsWrapper);
 }
 const previousProducts: iProduct[] = [];
 
