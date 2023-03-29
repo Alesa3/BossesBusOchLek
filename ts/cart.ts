@@ -94,6 +94,12 @@ export function numberOfItemInCart(cart: string[], id: string) {
   return cart.filter((v) => v == id).length;
 }
 
+function getProductQuantity(product: any) {
+  let cart = JSON.parse(localStorage.getItem("cart")!);
+  let numberOfItems = cart.find((c: iProduct) => c.id == product.id);
+  return numberOfItems.quantity;
+}
+
 export default function printCart() {
   carouselWrapper.classList.add("hidden");
   main.innerHTML = "";
@@ -152,10 +158,10 @@ export default function printCart() {
           productDescription.innerHTML = product.description;
           productPrice.innerText = product.price + " kr";
           productPrice.setAttribute("class", "product-price");
-          productQuantity.innerText = `ANTAL: ${numberOfItemInCart(
-            cart,
-            product.id.toString()
-          )}`;
+
+          productQuantity.innerText = `ANTAL: ${getProductQuantity(product)}`;
+          console.log(cart);
+          console.log(product);
           productDelete.innerText = "Radera";
 
           productInfo.append(upperProductBox, lowerProductBox);
