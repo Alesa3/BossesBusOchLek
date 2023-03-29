@@ -263,6 +263,42 @@ body {
     font-weight: 600;
   }
 }
+.productTitle{
+  &:hover{
+    
+    font-weight: bolder;
+    cursor: pointer;
+  }
+        
+}
+.productCard{
+  
+  text-align: center;
+}
+.productDetails {
+  width: auto;
+  text-align: center;
+  background-color: $box-color;
+  
+}
+.productImage {
+  max-width: 100%;
+  height: 250px;
+}
+.relatedProductsCard{
+  text-align: center;
+  h2{
+    text-align: center;
+  }
+  .relatedProductsTitle{
+    text-align: center;
+    &:hover{
+      font-weight: bolder;
+      cursor: pointer;
+    } 
+  text-align: center;
+    }
+}
 
 @media (min-width: 1366px) {
   #news-section {

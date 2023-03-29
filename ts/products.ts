@@ -1,40 +1,44 @@
+import fetcher from "./fetcher";
+import printProductPage from "./productPage";
 const contentArea = document.querySelector("main") as HTMLElement;
-import { addToCart } from "./cart";
+const productPageUrl = "/wc/v3/products/";
 
 interface product {
+  id: number;
   name: string;
   permalink: string;
   images: Array<{ src: string }>;
   price: number;
-  id: string;
 }
 
 export default function printselected(selected: Array<product>) {
   contentArea.innerHTML = "";
-  const productsWrapper = document.createElement("section");
-  productsWrapper.setAttribute("id", "products-wrapper");
-  contentArea.append(productsWrapper);
-
   for (let i = 0; i < selected.length; i++) {
     const productCard = document.createElement("div");
-    const addToCartBtn = document.createElement("button");
-    addToCartBtn.innerText = "Lägg till i hundkorgen";
-    addToCartBtn.id = selected[i].id;
-    addToCartBtn.addEventListener("click", addToCart);
+    productCard.setAttribute("class", "productCard");
+    const productId = selected[i].id;
+    const addToCart = document.createElement("button");
+    addToCart.innerText = "Lägg till i hundkorgen";
     productCard.innerHTML = "";
     productCard.setAttribute("class", "productCard");
-    const productTitle = document.createElement("a");
+    const productTitle = document.createElement("p");
+    productTitle.setAttribute("class", "productTitle");
     productTitle.innerText = selected[i].name;
-    productTitle.href = selected[i].permalink;
-    let productImage = document.createElement("img") as HTMLImageElement;
+    //lägg till event listener för print single prod i productTitle
+    const productImage = document.createElement("img");
+    productImage.setAttribute("class", "productImage");
     productImage.src = selected[i].images[0].src;
 
-    let productPrice = document.createElement("p");
+    const productPrice = document.createElement("p");
 
     productPrice.innerText = selected[i].price + "kr";
 
-    productsWrapper.append(productCard);
+    productTitle.addEventListener("click", () => {
+      printProductPage(productPageUrl + productId);
+    });
+
+    contentArea.append(productCard);
     productCard.append(productImage);
-    productCard.append(productTitle, productPrice, addToCartBtn);
+    productCard.append(productTitle, productPrice, addToCart);
   }
 }
