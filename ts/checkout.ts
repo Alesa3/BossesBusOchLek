@@ -6,6 +6,7 @@ const productsWrapper = document.createElement("section");
 productsWrapper.classList.add("productsWrap");
 const cart = JSON.parse(localStorage.getItem("cart")!);
 let totalPrice = 0;
+const totalPriceEl = document.createElement("p");
 
 export default function printCheckout() {
   main.innerHTML = "";
@@ -13,21 +14,16 @@ export default function printCheckout() {
     main.innerText = "Det finns inga produkter i din varukorg";
   }
 
-
   cart.map((item: { id: string }) => {
     // [13, 15, 14, 15]
     fetcher(`/wc/v3/products/${item.id}`).then((product: iProduct) => {
       createProduct(product);
-
     });
-    
   });
-  main.append(productsWrapper);
+  main.append(productsWrapper, totalPriceEl);
 }
-const totalPriceEl = (document.createElement("p").innerText =
-  totalPrice.toString());
-console.log(totalPrice)
-main.append(totalPriceEl);
+
+console.log(totalPrice);
 
 function createProduct(product: iProduct) {
   const cartItem = cart.find((c: any) => c.id == product.id);
@@ -44,6 +40,8 @@ function createProduct(product: iProduct) {
 
   const sectionProduct = document.createElement("div");
   totalPrice += product.price * cartItem.quantity;
+  totalPriceEl.innerText = `Total pris: ${totalPrice.toString()}`;
+
   sectionProduct.append(
     // productImage,
     productName,
@@ -70,7 +68,7 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     shipping: {
       first_name: "Janne",
@@ -80,34 +78,34 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     line_items: [
       // LOOPA IGENOM KUNDVAGN
       {
         product_id: 13,
-        quantity: 1
+        quantity: 1,
       },
       {
         product_id: 11,
-        quantity: 2
-      }
+        quantity: 2,
+      },
     ],
     shipping_lines: [
       {
         method_id: "flat_rate",
         method_title: "Flat rate",
-        total: "100"
-      }
-    ]
+        total: "100",
+      },
+    ],
   };
 
   fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json"
+      "Content-type": "application/json",
     },
-    body: JSON.stringify(order)
+    body: JSON.stringify(order),
   })
     .then((res) => res.json())
     .then((data) => {
