@@ -1,4 +1,4 @@
-export interface iProduct {
+export default interface iProduct {
   id: string;
   name: string;
   price: number;
