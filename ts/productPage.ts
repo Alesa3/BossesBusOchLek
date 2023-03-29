@@ -1,3 +1,4 @@
+import { addToCart } from "./cart";
 import fetcher from "./fetcher";
 const contentArea = document.querySelector("main") as HTMLElement;
 const productUrl = "/wc/v3/products/";
@@ -20,7 +21,7 @@ export default function printProductPage(url: string) {
         const productDescription = document.createElement("p");
         productDescription.innerHTML = productPage.description;
 
-        const purchaseBtn = document.createElement("input");
+        const purchaseBtn = document.createElement("button");
         const relatedProductsTitle = document.createElement("h2");
         relatedProductsTitle.innerText = "Relaterade Produkter";
 
@@ -48,9 +49,9 @@ export default function printProductPage(url: string) {
         });
 
         contentArea.innerHTML = "";
-        purchaseBtn.setAttribute("type", "button");
-        purchaseBtn.setAttribute("value", "Lägg i hundkorg");
-
+        purchaseBtn.innerText ="Lägg till i hundkorg";
+        purchaseBtn.id = productPage.id;
+        purchaseBtn.addEventListener("click", addToCart)
         contentArea.append(productImage, productDetailsCard);
         productDetailsCard.append(
             productTitle,
