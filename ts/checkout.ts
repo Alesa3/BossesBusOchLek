@@ -86,7 +86,11 @@ function createProduct(product: iProduct) {
 
 function postOrder() {
   console.log("Skicka order");
+  const cartArr = (JSON.parse(localStorage.getItem("cart")!));
 
+  cartArr.map((item: any) => {
+    item.id = Number(item.id)
+  })
   // SKAPA BODY
   const order = {
     payment_method: "bacs",
@@ -104,26 +108,16 @@ function postOrder() {
       phone: document.querySelector("input.phone")
     },
     shipping: {
-      first_name: "Janne",
-      last_name: "Kemi",
-      adress_1: "Gatan 10",
-      city: "Uddebo",
-      postcode: "514 92",
+      first_name: document.querySelector("input.name"),
+      last_name: document.querySelector("input.lastName"),
+      adress_1: document.querySelector("input.adress"),
+      city: document.querySelector("input.city"),
+      postcode: document.querySelector("input.postCode"),
       country: "SE",
-      email: "janne@hiveandfive.se",
-      phone: "070123456"
+      email: document.querySelector("input.email"),
+      phone: document.querySelector("input.phone")
     },
-    line_items: [
-      // LOOPA IGENOM KUNDVAGN
-      {
-        product_id: 13,
-        quantity: 1
-      },
-      {
-        product_id: 11,
-        quantity: 2
-      }
-    ],
+    line_items: cartArr,
     shipping_lines: [
       {
         method_id: "flat_rate",
@@ -133,12 +127,12 @@ function postOrder() {
     ]
   };
 
-
-  fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
+  fetch("http://46.101.130.27/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json"
+      "Content-type": "application/json",
     },
+    mode: "no-cors",
     body: JSON.stringify(order)
   })
     .then((res) => res.json())
