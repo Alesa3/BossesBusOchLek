@@ -12,3 +12,7 @@
     background-size: 0 2px, 100% 2px;
   }
 }
+@mixin store-button() {
+  padding: 8px 12px;
+  margin-top: 8px;
+}
