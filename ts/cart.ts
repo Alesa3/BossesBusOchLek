@@ -14,24 +14,7 @@ const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
   console.log(btn.id);
-  //[1, 2, 3]
 
-  /*
-[
-  {
-    id: 1
-    qty: 1
-  },
-  {
-    id: 12
-    qty: 1
-  },
-  {
-    id: 13
-    qty: 2
-  },
-]
-*/
   // HÄMTA
   let cart = JSON.parse(localStorage.getItem("cart")!);
   console.log("Cart från localStorage", cart);
@@ -59,39 +42,28 @@ export function addToCart(event: Event) {
     });
   }
 
-  // if (cart.length > 0) {
-  //   cart.map((c: iProduct) => {
-  //     console.log("Början av map, innehåll finns");
-  //     if (c.id == btn.id) {
-  //       console.log(c);
-  //       console.log("Item ID finns i cart");
-  //       c.quantity++;
-  //       return;
-  //     } else {
-  //       console.log(c);
-  //       console.log("Item ID finns inte i cart");
-  //       cart.push({
-  //         id: btn.id,
-  //         quantity: 1,
-  //       });
-  //       return;
-  //     }
-  //   });
-  // } else {
-  //   console.log("Tom cart, första pushen till cart");
-  //   cart.push({
-  //     id: btn.id,
-  //     quantity: 1,
-  //   });
-  // }
-
   // SPARA
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Räkna hur många items finns i cart
-export function numberOfItemInCart(cart: string[], id: string) {
-  return cart.filter((v) => v == id).length;
+export function removeFromCart(event: Event) {
+  const btn = event.target as HTMLButtonElement;
+  console.log(btn.id);
+
+  // HÄMTA
+  let cart = JSON.parse(localStorage.getItem("cart")!);
+
+  // ÄNDRA
+  let productToRemove = cart.find((c: iProduct) => c.id === btn.id);
+  console.log(productToRemove);
+  const indexOfProduct = cart.indexOf(productToRemove);
+  console.log(indexOfProduct);
+  cart.splice(indexOfProduct, 1);
+
+  // SPARA
+  localStorage.setItem("cart", JSON.stringify(cart));
+  console.log(cart);
+  printCart();
 }
 
 function getProductQuantity(product: any) {
@@ -159,6 +131,8 @@ export default function printCart() {
 
           productQuantity.innerText = `ANTAL: ${getProductQuantity(product)}`;
           productDelete.innerText = "Radera";
+          productDelete.id = product.id;
+          productDelete.addEventListener("click", removeFromCart);
 
           productInfo.append(upperProductBox, lowerProductBox);
           productLI.append(productImg, productInfo);
