@@ -117,9 +117,7 @@ export default function printCart() {
   if (localStorage.getItem("cart")) {
     console.log("Kundvagn finns");
     if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
-      //   console.log(JSON.parse(localStorage.getItem("cart")!));'
       let cart = JSON.parse(localStorage.getItem("cart")!);
-      console.log(cart);
       let totalAmount: number = 0;
 
       cart.map((product: any) => {
@@ -160,8 +158,6 @@ export default function printCart() {
           productPrice.setAttribute("class", "product-price");
 
           productQuantity.innerText = `ANTAL: ${getProductQuantity(product)}`;
-          console.log(cart);
-          console.log(product);
           productDelete.innerText = "Radera";
 
           productInfo.append(upperProductBox, lowerProductBox);
@@ -204,8 +200,6 @@ export default function printCart() {
   }
 
   if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
-    console.log("Finns produkter");
-
     // hundkorg.innerText =
     JSON.parse(localStorage.getItem("cart")!).length + 1 + " st produkter";
 
