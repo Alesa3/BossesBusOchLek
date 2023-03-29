@@ -117,9 +117,7 @@ export default function printCart() {
   if (localStorage.getItem("cart")) {
     console.log("Kundvagn finns");
     if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
-      //   console.log(JSON.parse(localStorage.getItem("cart")!));'
       let cart = JSON.parse(localStorage.getItem("cart")!);
-      console.log(cart);
       let totalAmount: number = 0;
 
       cart.map((product: any) => {
@@ -160,16 +158,13 @@ export default function printCart() {
           productPrice.setAttribute("class", "product-price");
 
           productQuantity.innerText = `ANTAL: ${getProductQuantity(product)}`;
-          console.log(cart);
-          console.log(product);
           productDelete.innerText = "Radera";
 
           productInfo.append(upperProductBox, lowerProductBox);
           productLI.append(productImg, productInfo);
           cartUL.append(productLI);
 
-          totalAmount += Number(product.price);
-          console.log(totalAmount);
+          totalAmount += Number(product.price * getProductQuantity(product));
           cartTotalPrice.innerText = totalAmount.toString() + " kr";
         });
       });
@@ -198,14 +193,9 @@ export default function printCart() {
     } else {
       hundkorgWrapper.innerText = "Din hundvagn är tom!";
     }
-  } else {
-    console.log("Kundvagn finns inte");
-    localStorage.setItem("cart", JSON.stringify([]));
   }
 
   if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
-    console.log("Finns produkter");
-
     // hundkorg.innerText =
     JSON.parse(localStorage.getItem("cart")!).length + 1 + " st produkter";
 
