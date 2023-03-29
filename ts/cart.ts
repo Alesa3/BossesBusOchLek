@@ -1,4 +1,4 @@
-import { iProduct } from "./interfaces";
+import iProduct from "./interfaces";
 import printCheckout from "./checkout";
 import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
