@@ -38,23 +38,52 @@ export function addToCart(event: Event) {
 
   // ÄNDRA
   if (cart.length > 0) {
-    cart.map((c: iProduct) => {
-      if (c.id == btn.id) {
-        c.quantity++;
-      } else {
-        cart.push({
-          id: btn.id,
-          quantity: 1
-        });
-      }
-    });
-  }else{
+    let existingProduct = cart.find((c: iProduct) => c.id === btn.id);
+    if (existingProduct) {
+      existingProduct.quantity++;
+      const position = cart.findIndex(
+        (c: iProduct) => c.id == existingProduct.id
+      );
+      cart[position] = existingProduct;
+    } else {
+      cart.push({
+        id: btn.id,
+        quantity: 1,
+      });
+    }
+  } else {
+    console.log("Tom cart, första pushen till cart");
     cart.push({
       id: btn.id,
-      quantity: 1
+      quantity: 1,
     });
   }
 
+  // if (cart.length > 0) {
+  //   cart.map((c: iProduct) => {
+  //     console.log("Början av map, innehåll finns");
+  //     if (c.id == btn.id) {
+  //       console.log(c);
+  //       console.log("Item ID finns i cart");
+  //       c.quantity++;
+  //       return;
+  //     } else {
+  //       console.log(c);
+  //       console.log("Item ID finns inte i cart");
+  //       cart.push({
+  //         id: btn.id,
+  //         quantity: 1,
+  //       });
+  //       return;
+  //     }
+  //   });
+  // } else {
+  //   console.log("Tom cart, första pushen till cart");
+  //   cart.push({
+  //     id: btn.id,
+  //     quantity: 1,
+  //   });
+  // }
 
   // SPARA
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -87,8 +116,8 @@ export default function printCart() {
       console.log(cart);
       let totalAmount: number = 0;
 
-      cart.map((id: any) => {
-        fetcher("/wc/v3/products/" + id).then((product: any) => {
+      cart.map((product: any) => {
+        fetcher("/wc/v3/products/" + product.id).then((product: any) => {
           const productLI = document.createElement("li");
           productLI.setAttribute("class", "cart-LI");
 
@@ -214,7 +243,7 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     shipping: {
       first_name: "Janne",
@@ -224,34 +253,34 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     line_items: [
       // LOOPA IGENOM KUNDVAGN
       {
         product_id: 13,
-        quantity: 1
+        quantity: 1,
       },
       {
         product_id: 11,
-        quantity: 2
-      }
+        quantity: 2,
+      },
     ],
     shipping_lines: [
       {
         method_id: "flat_rate",
         method_title: "Flat rate",
-        total: "100"
-      }
-    ]
+        total: "100",
+      },
+    ],
   };
 
   fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json"
+      "Content-type": "application/json",
     },
-    body: JSON.stringify(order)
+    body: JSON.stringify(order),
   })
     .then((res) => res.json())
     .then((data) => {
