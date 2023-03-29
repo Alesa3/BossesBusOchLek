@@ -4,20 +4,11 @@ import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
-// async function filterProducts(ID: string): Promise<any> {
-//   const result = await fetcher("/wc/v3/products/" + ID);
-//   // const result = products.find((product: any) => product.id == ID);
-//   console.log(result);
-//   return result;
-// }
-
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
-  console.log(btn.id);
 
   // HÄMTA
   let cart = JSON.parse(localStorage.getItem("cart")!);
-  console.log("Cart från localStorage", cart);
 
   // ÄNDRA
   if (cart.length > 0) {
@@ -35,7 +26,6 @@ export function addToCart(event: Event) {
       });
     }
   } else {
-    console.log("Tom cart, första pushen till cart");
     cart.push({
       id: btn.id,
       quantity: 1,
@@ -48,21 +38,17 @@ export function addToCart(event: Event) {
 
 export function removeFromCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
-  console.log(btn.id);
 
   // HÄMTA
   let cart = JSON.parse(localStorage.getItem("cart")!);
 
   // ÄNDRA
   let productToRemove = cart.find((c: iProduct) => c.id === btn.id);
-  console.log(productToRemove);
   const indexOfProduct = cart.indexOf(productToRemove);
-  console.log(indexOfProduct);
   cart.splice(indexOfProduct, 1);
 
   // SPARA
   localStorage.setItem("cart", JSON.stringify(cart));
-  console.log(cart);
   printCart();
 }
 
@@ -87,7 +73,6 @@ export default function printCart() {
   hundkorgWrapper.append(cartTitle, cartUL);
 
   if (localStorage.getItem("cart")) {
-    console.log("Kundvagn finns");
     if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
       let cart = JSON.parse(localStorage.getItem("cart")!);
       let totalAmount: number = 0;
