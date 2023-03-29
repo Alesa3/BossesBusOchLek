@@ -4,37 +4,11 @@ import fetcher from "./fetcher";
 const main = document.querySelector("main") as HTMLElement;
 const carouselWrapper = document.querySelector(".carousel") as HTMLDivElement;
 
-// async function filterProducts(ID: string): Promise<any> {
-//   const result = await fetcher("/wc/v3/products/" + ID);
-//   // const result = products.find((product: any) => product.id == ID);
-//   console.log(result);
-//   return result;
-// }
-
 export function addToCart(event: Event) {
   const btn = event.target as HTMLButtonElement;
-  console.log(btn.id);
-  //[1, 2, 3]
 
-  /*
-[
-  {
-    id: 1
-    qty: 1
-  },
-  {
-    id: 12
-    qty: 1
-  },
-  {
-    id: 13
-    qty: 2
-  },
-]
-*/
   // HÄMTA
   let cart = JSON.parse(localStorage.getItem("cart")!);
-  console.log("Cart från localStorage", cart);
 
   // ÄNDRA
   if (cart.length > 0) {
@@ -52,46 +26,30 @@ export function addToCart(event: Event) {
       });
     }
   } else {
-    console.log("Tom cart, första pushen till cart");
     cart.push({
       id: btn.id,
       quantity: 1,
     });
   }
 
-  // if (cart.length > 0) {
-  //   cart.map((c: iProduct) => {
-  //     console.log("Början av map, innehåll finns");
-  //     if (c.id == btn.id) {
-  //       console.log(c);
-  //       console.log("Item ID finns i cart");
-  //       c.quantity++;
-  //       return;
-  //     } else {
-  //       console.log(c);
-  //       console.log("Item ID finns inte i cart");
-  //       cart.push({
-  //         id: btn.id,
-  //         quantity: 1,
-  //       });
-  //       return;
-  //     }
-  //   });
-  // } else {
-  //   console.log("Tom cart, första pushen till cart");
-  //   cart.push({
-  //     id: btn.id,
-  //     quantity: 1,
-  //   });
-  // }
-
   // SPARA
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Räkna hur många items finns i cart
-export function numberOfItemInCart(cart: string[], id: string) {
-  return cart.filter((v) => v == id).length;
+export function removeFromCart(event: Event) {
+  const btn = event.target as HTMLButtonElement;
+
+  // HÄMTA
+  let cart = JSON.parse(localStorage.getItem("cart")!);
+
+  // ÄNDRA
+  let productToRemove = cart.find((c: iProduct) => c.id === btn.id);
+  const indexOfProduct = cart.indexOf(productToRemove);
+  cart.splice(indexOfProduct, 1);
+
+  // SPARA
+  localStorage.setItem("cart", JSON.stringify(cart));
+  printCart();
 }
 
 function getProductQuantity(product: any) {
@@ -115,7 +73,6 @@ export default function printCart() {
   hundkorgWrapper.append(cartTitle, cartUL);
 
   if (localStorage.getItem("cart")) {
-    console.log("Kundvagn finns");
     if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
       let cart = JSON.parse(localStorage.getItem("cart")!);
       let totalAmount: number = 0;
@@ -159,6 +116,8 @@ export default function printCart() {
 
           productQuantity.innerText = `ANTAL: ${getProductQuantity(product)}`;
           productDelete.innerText = "Radera";
+          productDelete.id = product.id;
+          productDelete.addEventListener("click", removeFromCart);
 
           productInfo.append(upperProductBox, lowerProductBox);
           productLI.append(productImg, productInfo);
