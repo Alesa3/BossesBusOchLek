@@ -164,8 +164,7 @@ export default function printCart() {
           productLI.append(productImg, productInfo);
           cartUL.append(productLI);
 
-          totalAmount += Number(product.price);
-          console.log(totalAmount);
+          totalAmount += Number(product.price * getProductQuantity(product));
           cartTotalPrice.innerText = totalAmount.toString() + " kr";
         });
       });
@@ -194,9 +193,6 @@ export default function printCart() {
     } else {
       hundkorgWrapper.innerText = "Din hundvagn är tom!";
     }
-  } else {
-    console.log("Kundvagn finns inte");
-    localStorage.setItem("cart", JSON.stringify([]));
   }
 
   if (JSON.parse(localStorage.getItem("cart")!).length > 0) {
