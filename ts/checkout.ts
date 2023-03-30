@@ -31,36 +31,36 @@ export default function printCheckout() {
 }
 function printForm() {
   const form = document.createElement("form");
-  const firstNameLabel = document.createElement("label")
-  firstNameLabel.innerText = "Namn"
+  const firstNameLabel = document.createElement("label");
+  firstNameLabel.innerText = "Namn";
   const firstName = document.createElement("input");
   firstName.className = "firstName";
   const lastName = document.createElement("input");
-  lastName.className="lastName"
+  lastName.className = "lastName";
   const lastNameLabel = document.createElement("label");
-  lastNameLabel.innerText ="Efternamn"
+  lastNameLabel.innerText = "Efternamn";
   const adress = document.createElement("input");
-  const adressLabel = document.createElement("label")
-  adressLabel.innerText= "Gata"
-  adress.className="adress"
+  const adressLabel = document.createElement("label");
+  adressLabel.innerText = "Gata";
+  adress.className = "adress";
   const city = document.createElement("input");
   const cityLabel = document.createElement("label");
-  cityLabel.innerText = "Ort"
-  city.className="city"
+  cityLabel.innerText = "Ort";
+  city.className = "city";
   const postcode = document.createElement("input");
   const postcodeLabel = document.createElement("label");
-  postcodeLabel.innerText = "Postnummer"
-  postcode.className="postCode"
+  postcodeLabel.innerText = "Postnummer";
+  postcode.className = "postCode";
   const email = document.createElement("input");
   const emailLabel = document.createElement("label");
-  emailLabel.innerText = "E-post"
-  email.className="email"
-  email.setAttribute("type", "email")
+  emailLabel.innerText = "E-post";
+  email.className = "email";
+  email.setAttribute("type", "email");
   const phone = document.createElement("input");
   const phoneLabel = document.createElement("label");
-  phoneLabel.innerText = "Telefon"
-  phone.className="phone"
-  phone.setAttribute("type", "tel")
+  phoneLabel.innerText = "Telefon";
+  phone.className = "phone";
+  phone.setAttribute("type", "tel");
 
   form.append(
     firstNameLabel,
@@ -71,14 +71,14 @@ function printForm() {
     adress,
     cityLabel,
     city,
-    postcodeLabel, 
+    postcodeLabel,
     postcode,
     emailLabel,
     email,
     phoneLabel,
     phone
   );
-  main.append(form)
+  main.append(form);
 }
 
 function createProduct(product: iProduct) {
@@ -112,23 +112,28 @@ function postOrder() {
   console.log("Skicka order");
   const cartArr = JSON.parse(localStorage.getItem("cart")!);
 
+  let orderArr: [{ product_id: number; quantity: number }] = [
+    { product_id: 1, quantity: 1 }
+  ];
   cartArr.map((item: any) => {
-    item.id = Number(item.id)
-  })
+    orderArr[cartArr.indexOf(item)].product_id = item.id;
+    orderArr[cartArr.indexOf(item)].quantity = item.quantity;
+  });
 
-  const firstName = document.querySelector("input.firstName") as HTMLInputElement
-  const lastName = document.querySelector("input.lastName") as HTMLInputElement
-  const adress =  document.querySelector("input.adress") as HTMLInputElement
-  const city = document.querySelector("input.city") as HTMLInputElement
-  const postCode = document.querySelector("input.postCode") as HTMLInputElement
-  const email = document.querySelector("input.email") as HTMLInputElement
-  const phone = document.querySelector("input.phone") as HTMLInputElement
+  const firstName = document.querySelector(
+    "input.firstName"
+  ) as HTMLInputElement;
+  const lastName = document.querySelector("input.lastName") as HTMLInputElement;
+  const adress = document.querySelector("input.adress") as HTMLInputElement;
+  const city = document.querySelector("input.city") as HTMLInputElement;
+  const postCode = document.querySelector("input.postCode") as HTMLInputElement;
+  const email = document.querySelector("input.email") as HTMLInputElement;
+  const phone = document.querySelector("input.phone") as HTMLInputElement;
   // SKAPA BODY
   const order = {
     payment_method: "bacs",
     payment_method_title: "Direct Bank Transfer",
     set_paid: true,
-    customer_id: 1,
     billing: {
       first_name: firstName.value,
       last_name: lastName.value,
@@ -137,7 +142,7 @@ function postOrder() {
       postcode: postCode.value,
       country: "SE",
       email: email.value,
-      phone: phone.value,
+      phone: phone.value
     },
     shipping: {
       first_name: firstName.value,
@@ -147,9 +152,9 @@ function postOrder() {
       postcode: postCode.value,
       country: "SE",
       email: email.value,
-      phone: phone.value,
+      phone: phone.value
     },
-    line_items: cartArr,
+    line_items: orderArr,
     shipping_lines: [
       {
         method_id: "flat_rate",
@@ -158,18 +163,18 @@ function postOrder() {
       }
     ]
   };
-  console.log(order)
+  console.log(order);
   fetch("http://46.101.130.27/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
+      "Content-type": "application/json"
     },
     body: JSON.stringify(order)
   })
     .then((res) => res.json())
     .then((data) => {
       console.log("Order skickad", data);
-      // localStorage.setItem("cart", JSON.stringify([]));
+      localStorage.setItem("cart", JSON.stringify([]));
       printCheckout();
     })
     .catch((err) => console.log("err", err));
