@@ -85,27 +85,26 @@ function createProduct(product: iProduct) {
   const cart = JSON.parse(localStorage.getItem("cart")!);
   const cartItem = cart.find((c: any) => c.id == product.id);
 
-  const productName = (document.createElement("p").innerText = product.name);
-  const productPrice = (document.createElement(
-    "p"
-  ).innerText = ` Pris: ${product.price}`);
-  const productQuantity = (document.createElement(
-    "p"
-  ).innerText = ` Antal: ${cartItem.quantity}`);
+  const productName = document.createElement("p");
+  productName.innerText = product.name;
+
+  const productPrice = document.createElement("p");
+  productPrice.innerText = ` Pris: ${product.price}`;
+
+  const productQuantity = document.createElement("p");
+  productQuantity.innerText = ` Antal: ${cartItem.quantity}`;
+
   const productImage = document.createElement("img");
   productImage.src = product.images[0].src;
 
-  const sectionProduct = document.createElement("div");
+  const row = document.createElement("div");
   totalPrice += product.price * cartItem.quantity;
   totalPriceEl.innerText = `Totalsumma: ${totalPrice.toString()} SEK`;
-
-  sectionProduct.append(
-    productImage,
-    productName,
-    productPrice,
-    productQuantity
-  );
-  productsWrapper.append(sectionProduct);
+  const priceInfo = document.createElement("div");
+  priceInfo.className ="priceInfo"
+  priceInfo.append(productName, productPrice, productQuantity);
+  row.append(productImage, priceInfo);
+  productsWrapper.append(row);
 }
 
 function postOrder() {
