@@ -6,6 +6,8 @@ const productUrl = "/wc/v3/products/";
 export default function printProductPage(url: string) {
     contentArea.innerHTML = "";
     fetcher(url).then((productPage) => {
+        const productPageWrapper = document.createElement("div");
+        productPageWrapper.className = "productPageWrapper";
         const productDetailsCard = document.createElement("article");
         productDetailsCard.setAttribute("class", "productDetails");
         const relatedProductsCard = document.createElement("article");
@@ -22,16 +24,25 @@ export default function printProductPage(url: string) {
         productDescription.innerHTML = productPage.description;
 
         const purchaseBtn = document.createElement("button");
+        purchaseBtn.addEventListener("click", addToCart);
         const relatedProductsTitle = document.createElement("h2");
         relatedProductsTitle.innerText = "Relaterade Produkter";
-
+        const relatedProductProductsWrapper = document.createElement("div");
+        relatedProductProductsWrapper.className = "relatedProductsWrapper";
         relatedProductsCard.appendChild(relatedProductsTitle);
         productPage.related_ids.forEach((relatedId: any) => {
             fetcher(productUrl + relatedId).then((relatedProduct) => {
                 const relatedProductImage = document.createElement("img");
-                relatedProductImage.setAttribute("class", "productImage");
+                relatedProductImage.setAttribute(
+                    "class",
+                    "relatedProductImage"
+                );
                 relatedProductImage.src = relatedProduct.images[0].src;
                 const relatedProductTitle = document.createElement("h2");
+                const relatedProductPurchaseBtn =
+                    document.createElement("button");
+                relatedProductPurchaseBtn.addEventListener("click", addToCart);
+                relatedProductPurchaseBtn.innerText = "Lägg till i hundkorg";
                 relatedProductTitle.setAttribute(
                     "class",
                     "relatedProductsTitle"
@@ -43,22 +54,26 @@ export default function printProductPage(url: string) {
                 });
                 relatedProductsCard.append(
                     relatedProductImage,
-                    relatedProductTitle
+                    relatedProductTitle,
+                    relatedProductPurchaseBtn
                 );
+                relatedProductProductsWrapper.append(relatedProductsCard);
             });
         });
 
         contentArea.innerHTML = "";
-        purchaseBtn.innerText ="Lägg till i hundkorg";
+        purchaseBtn.innerText = "Lägg till i hundkorg";
         purchaseBtn.id = productPage.id;
-        purchaseBtn.addEventListener("click", addToCart)
-        contentArea.append(productImage, productDetailsCard);
+        purchaseBtn.addEventListener("click", addToCart);
         productDetailsCard.append(
             productTitle,
             productPrice,
             productDescription,
             purchaseBtn
         );
-        contentArea.appendChild(relatedProductsCard);
+        productPageWrapper.append(productImage, productDetailsCard);
+
+        contentArea.append(productPageWrapper);
+        contentArea.appendChild(relatedProductProductsWrapper);
     });
 }
