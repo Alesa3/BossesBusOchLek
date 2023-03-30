@@ -7,6 +7,7 @@ productsWrapper.classList.add("productsWrap");
 
 let totalPrice = 0;
 const totalPriceEl = document.createElement("p");
+totalPriceEl.className = "priceSec";
 
 export default function printCheckout() {
   totalPrice = 0;
@@ -33,7 +34,7 @@ function printForm() {
   const firstNameLabel = document.createElement("label")
   firstNameLabel.innerText = "Namn"
   const firstName = document.createElement("input");
-  firstName.className="firstName"
+  firstName.className = "firstName";
   const lastName = document.createElement("input");
   lastName.className="lastName"
   const lastNameLabel = document.createElement("label");
@@ -96,10 +97,10 @@ function createProduct(product: iProduct) {
 
   const sectionProduct = document.createElement("div");
   totalPrice += product.price * cartItem.quantity;
-  totalPriceEl.innerText = `Total pris: ${totalPrice.toString()}`;
+  totalPriceEl.innerText = `Totalsumma: ${totalPrice.toString()} SEK`;
 
   sectionProduct.append(
-    // productImage,
+    productImage,
     productName,
     productPrice,
     productQuantity
@@ -109,7 +110,7 @@ function createProduct(product: iProduct) {
 
 function postOrder() {
   console.log("Skicka order");
-  const cartArr = (JSON.parse(localStorage.getItem("cart")!));
+  const cartArr = JSON.parse(localStorage.getItem("cart")!);
 
   cartArr.map((item: any) => {
     item.id = Number(item.id)
