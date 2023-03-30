@@ -7,6 +7,7 @@ productsWrapper.classList.add("productsWrap");
 
 let totalPrice = 0;
 const totalPriceEl = document.createElement("p");
+totalPriceEl.className = "priceSec";
 
 export default function printCheckout() {
   totalPrice = 0;
@@ -31,30 +32,22 @@ export default function printCheckout() {
 function printForm() {
   const form = document.createElement("form");
   const firstName = document.createElement("input");
-  firstName.className="firstName"
+  firstName.className = "firstName";
   const lastName = document.createElement("input");
-  lastName.className="lastName"
+  lastName.className = "lastName";
   const adress = document.createElement("input");
-  adress.className="adress"
+  adress.className = "adress";
   const city = document.createElement("input");
-  city.className="city"
+  city.className = "city";
   const postcode = document.createElement("input");
-  postcode.className="postCode"
+  postcode.className = "postCode";
   const email = document.createElement("input");
-  email.className="email"
+  email.className = "email";
   const phone = document.createElement("input");
-  phone.className="phone"
+  phone.className = "phone";
 
-  form.append(
-    firstName,
-    lastName,
-    adress,
-    city,
-    postcode,
-    email,
-    phone
-  );
-  main.append(form)
+  form.append(firstName, lastName, adress, city, postcode, email, phone);
+  main.append(form);
 }
 
 function createProduct(product: iProduct) {
@@ -73,10 +66,10 @@ function createProduct(product: iProduct) {
 
   const sectionProduct = document.createElement("div");
   totalPrice += product.price * cartItem.quantity;
-  totalPriceEl.innerText = `Total pris: ${totalPrice.toString()}`;
+  totalPriceEl.innerText = `Totalsumma: ${totalPrice.toString()} SEK`;
 
   sectionProduct.append(
-    // productImage,
+    productImage,
     productName,
     productPrice,
     productQuantity
@@ -101,7 +94,7 @@ function postOrder() {
       postcode: document.querySelector("input.postCode"),
       country: "SE",
       email: document.querySelector("input.email"),
-      phone: document.querySelector("input.phone")
+      phone: document.querySelector("input.phone"),
     },
     shipping: {
       first_name: "Janne",
@@ -111,35 +104,34 @@ function postOrder() {
       postcode: "514 92",
       country: "SE",
       email: "janne@hiveandfive.se",
-      phone: "070123456"
+      phone: "070123456",
     },
     line_items: [
       // LOOPA IGENOM KUNDVAGN
       {
         product_id: 13,
-        quantity: 1
+        quantity: 1,
       },
       {
         product_id: 11,
-        quantity: 2
-      }
+        quantity: 2,
+      },
     ],
     shipping_lines: [
       {
         method_id: "flat_rate",
         method_title: "Flat rate",
-        total: "100"
-      }
-    ]
+        total: "100",
+      },
+    ],
   };
-
 
   fetch("http://localhost:8888/rest/wp-json/wc/v3/orders", {
     method: "POST",
     headers: {
-      "Content-type": "application/json"
+      "Content-type": "application/json",
     },
-    body: JSON.stringify(order)
+    body: JSON.stringify(order),
   })
     .then((res) => res.json())
     .then((data) => {
